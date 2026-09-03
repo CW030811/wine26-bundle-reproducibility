@@ -1,0 +1,22 @@
+{
+  "passed": true,
+  "scope": "Known personal identifiers, local home/temp paths, email, license IDs, common token/private-key patterns; structured msgpack/checkpoint strings",
+  "archive_members_checked": 12631,
+  "checkpoint_containers_checked": 35,
+  "findings": [],
+  "source_equivalence": [
+    {
+      "source": "src/test/test_FCPLS_score_cached_lp.py",
+      "algorithm_ast_equal_excluding_path_and_guard_configuration": true
+    },
+    {
+      "source": "src/test/test_FCPLS_score_cached_lp_1.py",
+      "algorithm_ast_equal_excluding_path_and_guard_configuration": true
+    },
+    {
+      "source": "src/appendix_rerun/run_guarded_sensitivity.py",
+      "algorithm_ast_equal_excluding_path_and_guard_configuration": true
+    }
+  ],
+  "limitations": "Automated patterns are supplemented by manual source/document review; GitHub owner identity in repository URLs and commit authorship is intentionally retained."
+}

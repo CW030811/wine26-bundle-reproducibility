@@ -1,0 +1,15 @@
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+.env
+.env.*
+*.lic
+/data/
+/Dataset/
+/models/
+/models_multi_layer_edge_update/
+/artifacts/
+/results/
+/dataset2_4_2026/
+*.log

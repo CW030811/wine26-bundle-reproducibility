@@ -1,0 +1,249 @@
+{
+  "schema_version": 1,
+  "exactness_policy": {
+    "runtime_fields": "machine-dependent runtime values are excluded",
+    "solver_tolerance": "machine-dependent solver stopping-bound variation accepted when explicitly documented",
+    "display_rounding_tolerance": "for three-decimal paper statistics, accept the half-display-unit rounding interval plus at most 0.00005 explicitly documented numerical slack",
+    "required_components": [
+      "code",
+      "data",
+      "models",
+      "results",
+      "verification"
+    ]
+  },
+  "experiments": [
+    {
+      "id": "table_5_random_valuation",
+      "paper_location": "Section 7 / Table 5",
+      "title": "Additive random-valuation experiment with corrected Z lower bound",
+      "acceptance_basis": "Corrected Z-fix data, labels, training artifacts, checkpoint, 120-row raw result CSV and final TeX rows are archived and package verification matches the paper values.",
+      "key": "table5",
+      "status": "ACCEPTED_WITH_DOCUMENTED_SCOPE",
+      "archive": "bundles/table5.tar.gz",
+      "source_paths": [
+        {
+          "path": "src/random_valuation",
+          "type": "directory",
+          "expected_files": 11
+        }
+      ],
+      "commands": [
+        "uv run python src/random_valuation/Training_multi_layer_cpbsd_mb_x.py --device cpu",
+        "uv run python src/random_valuation/run_experiment_zfix.py --model-path artifacts/random_valuation/models/best_model_edge_cpbsd_mb_x_2layer_seed1000.pt --out-csv results/table5/experiment_zfix.csv"
+      ]
+    },
+    {
+      "id": "figure_9_cutoff_sensitivity",
+      "paper_location": "Appendix C / Figure 9",
+      "title": "FCP/PCP cutoff sensitivity",
+      "acceptance_basis": "User-confirmed exact reproduction classification: all experiment keys and classification outputs match; 1079/1080 revenue rows are bit-identical and the sole 60-second TIME_LIMIT ObjBound variation is accepted as solver/runtime dependent.",
+      "key": "figure9",
+      "status": "ACCEPTED_WITH_DOCUMENTED_SCOPE",
+      "archive": "bundles/figure9.tar.gz",
+      "source_paths": [
+        {
+          "path": "src/appendix/rerun_seed1.py",
+          "type": "file"
+        },
+        {
+          "path": "src/appendix/legacy_runtime/test_FCP.py",
+          "type": "file"
+        },
+        {
+          "path": "src/appendix/legacy_runtime/test_PCP.py",
+          "type": "file"
+        },
+        {
+          "path": "src/appendix/legacy_runtime/test_FCPLS_score.py",
+          "type": "file"
+        }
+      ],
+      "commands": [
+        "uv run python src/appendix/rerun_seed1.py --mode cutoff",
+        "uv run python scripts/compare_appendix_cd_rerun.py --figure figure9"
+      ]
+    },
+    {
+      "id": "figure_10_k_sensitivity",
+      "paper_location": "Appendix D / Figure 10",
+      "title": "FCPLS candidate-budget K sensitivity",
+      "acceptance_basis": "Full 630-row replay has identical experiment keys and every non-runtime result field; canonical non-runtime SHA-256 is identical.",
+      "key": "figure10",
+      "status": "ACCEPTED_WITH_DOCUMENTED_SCOPE",
+      "archive": "bundles/figure10.tar.gz",
+      "source_paths": [
+        {
+          "path": "src/appendix/rerun_seed1.py",
+          "type": "file"
+        },
+        {
+          "path": "src/appendix/legacy_runtime/test_FCP.py",
+          "type": "file"
+        },
+        {
+          "path": "src/appendix/legacy_runtime/test_PCP.py",
+          "type": "file"
+        },
+        {
+          "path": "src/appendix/legacy_runtime/test_FCPLS_score.py",
+          "type": "file"
+        }
+      ],
+      "commands": [
+        "uv run python src/appendix/rerun_seed1.py --mode k",
+        "uv run python scripts/compare_appendix_cd_rerun.py --figure figure10"
+      ]
+    },
+    {
+      "id": "figure_11_lp_milp_translation",
+      "paper_location": "Appendix E / Figure 11",
+      "title": "LP-to-restricted-MILP move translation verification",
+      "acceptance_basis": "Exact 60 inputs, seed-1 checkpoint, guarded cached-LP source and full replay reproduce 489/522 translations with identical per-instance paths and statistics.",
+      "key": "figure11",
+      "status": "ACCEPTED_WITH_DOCUMENTED_SCOPE",
+      "archive": "bundles/figure11.tar.gz",
+      "source_paths": [
+        {
+          "path": "src/appendix_rerun/run_guarded_sensitivity.py",
+          "type": "file"
+        },
+        {
+          "path": "src/test/test_FCPLS_score_cached_lp.py",
+          "type": "file"
+        },
+        {
+          "path": "src/test/test_FCPLS_score_cached_lp_1.py",
+          "type": "file"
+        },
+        {
+          "path": "src/report/replot_verification_paths.py",
+          "type": "file"
+        }
+      ],
+      "commands": [
+        "uv run python src/appendix_rerun/run_guarded_sensitivity.py --experiment lp_milp --output-dir results/appendix_e_replay --layer 4 --seed 1 --lp-milp-samples 10 --max-iterations 50 --tolerance 1e-6",
+        "uv run python src/report/replot_verification_paths.py"
+      ]
+    },
+    {
+      "id": "table_6_seed_robustness",
+      "paper_location": "Appendix I / Table 6",
+      "title": "Ten-seed training and FCP robustness",
+      "acceptance_basis": "Fresh 10-seed by 100-sample replay reproduces all 20 published loss values and all 20 published FCP profit mean/std values at displayed precision; runtime fields are excluded by policy.",
+      "key": "table6",
+      "status": "ACCEPTED_WITH_DOCUMENTED_SCOPE",
+      "archive": "bundles/table6.tar.gz",
+      "source_paths": [
+        {
+          "path": "src/deterministic/Training_multi_layer.py",
+          "type": "file"
+        },
+        {
+          "path": "src/deterministic/test_FCP.py",
+          "type": "file"
+        },
+        {
+          "path": "src/deterministic/test_FCP_multi_model_avg.py",
+          "type": "file"
+        },
+        {
+          "path": "scripts/verify_main_results.py",
+          "type": "file"
+        }
+      ],
+      "commands": [
+        "uv run python src/deterministic/test_FCP_multi_model_avg.py --data_dir . --test_subdirs data/deterministic/test_m10n10_correct_1e_3 --model_dir models/main_base_4layer_correct_lr_3 --layers 4 --seeds 1,2,3,4,5,6,7,8,9,10 --result_dir results/main_exact_rerun/table6",
+        "uv run python scripts/verify_main_results.py --experiment table6"
+      ]
+    },
+    {
+      "id": "table_7_ood_robustness",
+      "paper_location": "Appendix J / Table 7",
+      "title": "OOD robustness under four valuation distributions",
+      "acceptance_basis": "Fresh four-variant, ten-seed replay reproduces all eight published non-runtime profit mean/std values at displayed precision; the documented Beta(.5,.5) std convention boundary is user-accepted.",
+      "key": "table7",
+      "status": "ACCEPTED_WITH_DOCUMENTED_SCOPE",
+      "archive": "bundles/table7.tar.gz",
+      "source_paths": [
+        {
+          "path": "src/deterministic/test_FCP_multi_model_avg.py",
+          "type": "file"
+        },
+        {
+          "path": "src/deterministic/test_FCP_multi_model_avg_log.py",
+          "type": "file"
+        },
+        {
+          "path": "src/deterministic/test_FCP_multi_model_avg_f33.py",
+          "type": "file"
+        },
+        {
+          "path": "src/deterministic/test_FCP_log.py",
+          "type": "file"
+        },
+        {
+          "path": "src/deterministic/test_FCP_f33.py",
+          "type": "file"
+        },
+        {
+          "path": "scripts/verify_main_results.py",
+          "type": "file"
+        }
+      ],
+      "commands": [
+        "uv run python src/deterministic/test_FCP_multi_model_avg.py --data_dir . --test_subdirs 'data/ood/test_m10n10_beta_5_5_correct_1e_3;data/ood/test_m10n10_beta_half_half_correct_1e_3' --model_dir models/main_base_4layer_correct_lr_3 --result_dir results/main_exact_rerun/table7/beta",
+        "uv run python src/deterministic/test_FCP_multi_model_avg_log.py --data_dir . --test_subdirs data/ood/test_m10n10_log_correct_1e_3 --model_dir models/main_base_4layer_correct_lr_3 --result_dir results/main_exact_rerun/table7/log",
+        "uv run python src/deterministic/test_FCP_multi_model_avg_f33.py --data_dir . --test_subdirs data/ood/test_m10n10_f0.33_correct_1e_3 --model_dir models/main_base_4layer_correct_lr_3 --result_dir results/main_exact_rerun/table7/cube_root",
+        "uv run python scripts/verify_main_results.py --experiment table7"
+      ]
+    },
+    {
+      "id": "table_2_main_comparison",
+      "paper_location": "Section 7 / Table 2",
+      "title": "Main comparison of FCP, PCP, FCPLS and BSP",
+      "acceptance_basis": "Fresh complete replay covers 12 method-by-size cells: FCP/PCP/FCPLS each use 10 seeds by 100 samples and BSP uses 100 samples. All non-runtime profit mean/std values match at displayed precision or the explicitly bounded, user-approved rounding boundary tolerance; no samples failed.",
+      "key": "table2",
+      "status": "ACCEPTED_WITH_DOCUMENTED_SCOPE",
+      "archive": "bundles/table2.tar.gz",
+      "source_paths": [
+        {
+          "path": "scripts/run_table2_exact.py",
+          "type": "file"
+        },
+        {
+          "path": "scripts/verify_main_results.py",
+          "type": "file"
+        },
+        {
+          "path": "src/deterministic/test_FCP.py",
+          "type": "file"
+        },
+        {
+          "path": "src/deterministic/test_FCP_multi_model_avg.py",
+          "type": "file"
+        },
+        {
+          "path": "src/deterministic/test_PCP_cp.py",
+          "type": "file"
+        },
+        {
+          "path": "src/deterministic/test_PCP_cp_multi_model_avg.py",
+          "type": "file"
+        },
+        {
+          "path": "src/deterministic/test_FCPLS_score_cached_lp.py",
+          "type": "file"
+        },
+        {
+          "path": "src/deterministic/test_BSP.py",
+          "type": "file"
+        }
+      ],
+      "commands": [
+        "uv run python scripts/run_table2_exact.py",
+        "uv run python scripts/verify_main_results.py --experiment table2"
+      ]
+    }
+  ]
+}

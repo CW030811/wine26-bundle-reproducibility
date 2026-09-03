@@ -1,0 +1,798 @@
+{
+  "scope": "Archived evidence audit, not a new optimizer/training replay",
+  "experiments": {
+    "table2": {
+      "experiment": "table2",
+      "passed": true,
+      "checked_cells": 12,
+      "runtime_fields_checked": 0,
+      "details": [
+        {
+          "size": "m10",
+          "method": "FCP",
+          "raw_rows": 1000,
+          "aggregated_samples": 100,
+          "observed_non_runtime": [
+            0.989,
+            0.007
+          ],
+          "published_non_runtime": [
+            0.989,
+            0.007
+          ],
+          "raw_mean": 0.988794657914859,
+          "raw_population_std": 0.007349012411558609,
+          "raw_sample_std": 0.007386035378425698,
+          "mean_match_rule": "rounded_display",
+          "accepted_std_convention": "population",
+          "std_match_rule": "rounded_display",
+          "completeness_errors": [],
+          "matched": true
+        },
+        {
+          "size": "m10",
+          "method": "PCP",
+          "raw_rows": 1000,
+          "aggregated_samples": 100,
+          "observed_non_runtime": [
+            0.995,
+            0.005
+          ],
+          "published_non_runtime": [
+            0.995,
+            0.005
+          ],
+          "raw_mean": 0.9946285073189203,
+          "raw_population_std": 0.00466740920172205,
+          "raw_sample_std": 0.004690922747019472,
+          "mean_match_rule": "rounded_display",
+          "accepted_std_convention": "population",
+          "std_match_rule": "rounded_display",
+          "completeness_errors": [],
+          "matched": true
+        },
+        {
+          "size": "m10",
+          "method": "FCPLS",
+          "raw_rows": 1000,
+          "aggregated_samples": 100,
+          "observed_non_runtime": [
+            0.996,
+            0.004
+          ],
+          "published_non_runtime": [
+            0.996,
+            0.004
+          ],
+          "raw_mean": 0.9955271716397881,
+          "raw_population_std": 0.004348101851858398,
+          "raw_sample_std": 0.0043700067857162985,
+          "mean_match_rule": "rounded_display",
+          "accepted_std_convention": "population",
+          "std_match_rule": "rounded_display",
+          "completeness_errors": [],
+          "matched": true
+        },
+        {
+          "size": "m10",
+          "method": "BSP",
+          "raw_rows": 100,
+          "aggregated_samples": 100,
+          "observed_non_runtime": [
+            0.879,
+            0.028
+          ],
+          "published_non_runtime": [
+            0.879,
+            0.028
+          ],
+          "raw_mean": 0.878903450797004,
+          "raw_population_std": 0.028163228728657588,
+          "raw_sample_std": 0.028305109872095502,
+          "mean_match_rule": "rounded_display",
+          "accepted_std_convention": "population",
+          "std_match_rule": "rounded_display",
+          "completeness_errors": [],
+          "matched": true
+        },
+        {
+          "size": "m20",
+          "method": "FCP",
+          "raw_rows": 1000,
+          "aggregated_samples": 100,
+          "observed_non_runtime": [
+            0.985,
+            0.007
+          ],
+          "published_non_runtime": [
+            0.985,
+            0.007
+          ],
+          "raw_mean": 0.9846488183313364,
+          "raw_population_std": 0.006474709280204122,
+          "raw_sample_std": 0.006507327669414896,
+          "mean_match_rule": "rounded_display",
+          "accepted_std_convention": "sample",
+          "std_match_rule": "rounded_display",
+          "completeness_errors": [],
+          "matched": true
+        },
+        {
+          "size": "m20",
+          "method": "PCP",
+          "raw_rows": 1000,
+          "aggregated_samples": 100,
+          "observed_non_runtime": [
+            0.994,
+            0.004
+          ],
+          "published_non_runtime": [
+            0.995,
+            0.004
+          ],
+          "raw_mean": 0.9944858721964316,
+          "raw_population_std": 0.0037488832928288737,
+          "raw_sample_std": 0.0037677694742864923,
+          "mean_match_rule": "rounding_boundary_tolerance",
+          "accepted_std_convention": "population",
+          "std_match_rule": "rounded_display",
+          "completeness_errors": [],
+          "matched": true
+        },
+        {
+          "size": "m20",
+          "method": "FCPLS",
+          "raw_rows": 1000,
+          "aggregated_samples": 100,
+          "observed_non_runtime": [
+            0.991,
+            0.006
+          ],
+          "published_non_runtime": [
+            0.991,
+            0.006
+          ],
+          "raw_mean": 0.9911884720970038,
+          "raw_population_std": 0.005485297721641632,
+          "raw_sample_std": 0.00551293163820504,
+          "mean_match_rule": "rounded_display",
+          "accepted_std_convention": "sample",
+          "std_match_rule": "rounded_display",
+          "completeness_errors": [],
+          "matched": true
+        },
+        {
+          "size": "m20",
+          "method": "BSP",
+          "raw_rows": 100,
+          "aggregated_samples": 100,
+          "observed_non_runtime": [
+            0.863,
+            0.025
+          ],
+          "published_non_runtime": [
+            0.864,
+            0.025
+          ],
+          "raw_mean": 0.8634959264776714,
+          "raw_population_std": 0.025028966571198623,
+          "raw_sample_std": 0.025155057880913316,
+          "mean_match_rule": "rounding_boundary_tolerance",
+          "accepted_std_convention": "population",
+          "std_match_rule": "rounded_display",
+          "completeness_errors": [],
+          "matched": true
+        },
+        {
+          "size": "m30",
+          "method": "FCP",
+          "raw_rows": 1000,
+          "aggregated_samples": 100,
+          "observed_non_runtime": [
+            0.982,
+            0.006
+          ],
+          "published_non_runtime": [
+            0.982,
+            0.006
+          ],
+          "raw_mean": 0.9816265153485773,
+          "raw_population_std": 0.006350712803699916,
+          "raw_sample_std": 0.00638270652156927,
+          "mean_match_rule": "rounded_display",
+          "accepted_std_convention": "population",
+          "std_match_rule": "rounded_display",
+          "completeness_errors": [],
+          "matched": true
+        },
+        {
+          "size": "m30",
+          "method": "PCP",
+          "raw_rows": 1000,
+          "aggregated_samples": 100,
+          "observed_non_runtime": [
+            0.994,
+            0.004
+          ],
+          "published_non_runtime": [
+            0.994,
+            0.004
+          ],
+          "raw_mean": 0.9937032608153801,
+          "raw_population_std": 0.0039037811088703024,
+          "raw_sample_std": 0.003923447636909193,
+          "mean_match_rule": "rounded_display",
+          "accepted_std_convention": "population",
+          "std_match_rule": "rounded_display",
+          "completeness_errors": [],
+          "matched": true
+        },
+        {
+          "size": "m30",
+          "method": "FCPLS",
+          "raw_rows": 1000,
+          "aggregated_samples": 100,
+          "observed_non_runtime": [
+            0.988,
+            0.006
+          ],
+          "published_non_runtime": [
+            0.988,
+            0.006
+          ],
+          "raw_mean": 0.9878645052675483,
+          "raw_population_std": 0.005765097289261937,
+          "raw_sample_std": 0.005794140784356623,
+          "mean_match_rule": "rounded_display",
+          "accepted_std_convention": "population",
+          "std_match_rule": "rounded_display",
+          "completeness_errors": [],
+          "matched": true
+        },
+        {
+          "size": "m30",
+          "method": "BSP",
+          "raw_rows": 100,
+          "aggregated_samples": 100,
+          "observed_non_runtime": [
+            0.854,
+            0.02
+          ],
+          "published_non_runtime": [
+            0.854,
+            0.02
+          ],
+          "raw_mean": 0.8540554247208801,
+          "raw_population_std": 0.01968958347734503,
+          "raw_sample_std": 0.019788775961434732,
+          "mean_match_rule": "rounded_display",
+          "accepted_std_convention": "population",
+          "std_match_rule": "rounded_display",
+          "completeness_errors": [],
+          "matched": true
+        }
+      ],
+      "mismatches": []
+    },
+    "table6": {
+      "experiment": "table6",
+      "passed": true,
+      "checked_seeds": 10,
+      "runtime_fields_checked": 0,
+      "details": [
+        {
+          "seed": 1,
+          "samples": 100,
+          "observed_non_runtime": [
+            0.0779,
+            0.0938,
+            0.989,
+            0.008
+          ],
+          "published_non_runtime": [
+            0.0779,
+            0.0938,
+            0.989,
+            0.008
+          ],
+          "matched": true
+        },
+        {
+          "seed": 2,
+          "samples": 100,
+          "observed_non_runtime": [
+            0.0803,
+            0.0968,
+            0.988,
+            0.008
+          ],
+          "published_non_runtime": [
+            0.0803,
+            0.0968,
+            0.988,
+            0.008
+          ],
+          "matched": true
+        },
+        {
+          "seed": 3,
+          "samples": 100,
+          "observed_non_runtime": [
+            0.0786,
+            0.0974,
+            0.988,
+            0.009
+          ],
+          "published_non_runtime": [
+            0.0786,
+            0.0974,
+            0.988,
+            0.009
+          ],
+          "matched": true
+        },
+        {
+          "seed": 4,
+          "samples": 100,
+          "observed_non_runtime": [
+            0.0747,
+            0.091,
+            0.989,
+            0.009
+          ],
+          "published_non_runtime": [
+            0.0747,
+            0.091,
+            0.989,
+            0.009
+          ],
+          "matched": true
+        },
+        {
+          "seed": 5,
+          "samples": 100,
+          "observed_non_runtime": [
+            0.076,
+            0.0919,
+            0.989,
+            0.009
+          ],
+          "published_non_runtime": [
+            0.076,
+            0.0919,
+            0.989,
+            0.009
+          ],
+          "matched": true
+        },
+        {
+          "seed": 6,
+          "samples": 100,
+          "observed_non_runtime": [
+            0.073,
+            0.0917,
+            0.989,
+            0.009
+          ],
+          "published_non_runtime": [
+            0.073,
+            0.0917,
+            0.989,
+            0.009
+          ],
+          "matched": true
+        },
+        {
+          "seed": 7,
+          "samples": 100,
+          "observed_non_runtime": [
+            0.0682,
+            0.0887,
+            0.989,
+            0.008
+          ],
+          "published_non_runtime": [
+            0.0682,
+            0.0887,
+            0.989,
+            0.008
+          ],
+          "matched": true
+        },
+        {
+          "seed": 8,
+          "samples": 100,
+          "observed_non_runtime": [
+            0.0755,
+            0.0895,
+            0.989,
+            0.008
+          ],
+          "published_non_runtime": [
+            0.0755,
+            0.0895,
+            0.989,
+            0.008
+          ],
+          "matched": true
+        },
+        {
+          "seed": 9,
+          "samples": 100,
+          "observed_non_runtime": [
+            0.0815,
+            0.0994,
+            0.988,
+            0.01
+          ],
+          "published_non_runtime": [
+            0.0815,
+            0.0994,
+            0.988,
+            0.01
+          ],
+          "matched": true
+        },
+        {
+          "seed": 10,
+          "samples": 100,
+          "observed_non_runtime": [
+            0.08,
+            0.0976,
+            0.989,
+            0.008
+          ],
+          "published_non_runtime": [
+            0.08,
+            0.0976,
+            0.989,
+            0.008
+          ],
+          "matched": true
+        }
+      ],
+      "mismatches": []
+    },
+    "table7": {
+      "experiment": "table7",
+      "passed": true,
+      "checked_variants": 4,
+      "runtime_fields_checked": 0,
+      "details": [
+        {
+          "variant": "log1p",
+          "samples": 100,
+          "observed_non_runtime": [
+            0.98,
+            0.01
+          ],
+          "published_non_runtime": [
+            0.98,
+            0.01
+          ],
+          "raw_mean": 0.980248778247271,
+          "raw_population_std": 0.010272858295907943,
+          "raw_sample_std": 0.010324611058186791,
+          "accepted_std_convention": "population",
+          "matched": true
+        },
+        {
+          "variant": "cube_root",
+          "samples": 100,
+          "observed_non_runtime": [
+            0.95,
+            0.019
+          ],
+          "published_non_runtime": [
+            0.95,
+            0.019
+          ],
+          "raw_mean": 0.9495879008398515,
+          "raw_population_std": 0.01918307557209864,
+          "raw_sample_std": 0.019279716362934376,
+          "accepted_std_convention": "population",
+          "matched": true
+        },
+        {
+          "variant": "beta_5_5",
+          "samples": 100,
+          "observed_non_runtime": [
+            0.987,
+            0.008
+          ],
+          "published_non_runtime": [
+            0.987,
+            0.008
+          ],
+          "raw_mean": 0.9868049236802666,
+          "raw_population_std": 0.007701659375469856,
+          "raw_sample_std": 0.0077404589125928515,
+          "accepted_std_convention": "population",
+          "matched": true
+        },
+        {
+          "variant": "beta_half_half",
+          "samples": 100,
+          "observed_non_runtime": [
+            0.991,
+            0.008
+          ],
+          "published_non_runtime": [
+            0.991,
+            0.008
+          ],
+          "raw_mean": 0.9909559955875231,
+          "raw_population_std": 0.007491434479918724,
+          "raw_sample_std": 0.007529174942855045,
+          "accepted_std_convention": "sample",
+          "matched": true
+        }
+      ],
+      "mismatches": []
+    },
+    "table5": {
+      "passed": true,
+      "checked_fcp_bsp_statistics": 24,
+      "cpbsd_a_independently_replayed": false,
+      "scope": "FCP/BSP statistics from archived sweep; CPBSD-A and runtime cells reused from paper",
+      "details": [
+        {
+          "scale": 10,
+          "cost": "zero",
+          "method": "FCP",
+          "field": "ins",
+          "raw": 51.93959376653332,
+          "paper": 51.94,
+          "matched": true
+        },
+        {
+          "scale": 10,
+          "cost": "zero",
+          "method": "FCP",
+          "field": "oos",
+          "raw": 50.40044687667803,
+          "paper": 50.4,
+          "matched": true
+        },
+        {
+          "scale": 10,
+          "cost": "zero",
+          "method": "BSP",
+          "field": "ins",
+          "raw": 51.996476088959824,
+          "paper": 51.996,
+          "matched": true
+        },
+        {
+          "scale": 10,
+          "cost": "zero",
+          "method": "BSP",
+          "field": "oos",
+          "raw": 50.08128258162015,
+          "paper": 50.081,
+          "matched": true
+        },
+        {
+          "scale": 10,
+          "cost": "random_ind",
+          "method": "FCP",
+          "field": "ins",
+          "raw": 19.844943469838793,
+          "paper": 19.845,
+          "matched": true
+        },
+        {
+          "scale": 10,
+          "cost": "random_ind",
+          "method": "FCP",
+          "field": "oos",
+          "raw": 19.04009803681132,
+          "paper": 19.04,
+          "matched": true
+        },
+        {
+          "scale": 10,
+          "cost": "random_ind",
+          "method": "BSP",
+          "field": "ins",
+          "raw": 18.11112759214876,
+          "paper": 18.111,
+          "matched": true
+        },
+        {
+          "scale": 10,
+          "cost": "random_ind",
+          "method": "BSP",
+          "field": "oos",
+          "raw": 16.93728513479702,
+          "paper": 16.937,
+          "matched": true
+        },
+        {
+          "scale": 10,
+          "cost": "random_corr",
+          "method": "FCP",
+          "field": "ins",
+          "raw": 27.69800248180413,
+          "paper": 27.698,
+          "matched": true
+        },
+        {
+          "scale": 10,
+          "cost": "random_corr",
+          "method": "FCP",
+          "field": "oos",
+          "raw": 25.990564622709606,
+          "paper": 25.991,
+          "matched": true
+        },
+        {
+          "scale": 10,
+          "cost": "random_corr",
+          "method": "BSP",
+          "field": "ins",
+          "raw": 27.390257666293415,
+          "paper": 27.39,
+          "matched": true
+        },
+        {
+          "scale": 10,
+          "cost": "random_corr",
+          "method": "BSP",
+          "field": "oos",
+          "raw": 25.532876167358502,
+          "paper": 25.533,
+          "matched": true
+        },
+        {
+          "scale": 30,
+          "cost": "zero",
+          "method": "FCP",
+          "field": "ins",
+          "raw": 159.06374910018,
+          "paper": 159.064,
+          "matched": true
+        },
+        {
+          "scale": 30,
+          "cost": "zero",
+          "method": "FCP",
+          "field": "oos",
+          "raw": 156.2608880570971,
+          "paper": 156.261,
+          "matched": true
+        },
+        {
+          "scale": 30,
+          "cost": "zero",
+          "method": "BSP",
+          "field": "ins",
+          "raw": 159.00846965634386,
+          "paper": 159.008,
+          "matched": true
+        },
+        {
+          "scale": 30,
+          "cost": "zero",
+          "method": "BSP",
+          "field": "oos",
+          "raw": 156.28219635699242,
+          "paper": 156.282,
+          "matched": true
+        },
+        {
+          "scale": 30,
+          "cost": "random_ind",
+          "method": "FCP",
+          "field": "ins",
+          "raw": 56.142362819319395,
+          "paper": 56.142,
+          "matched": true
+        },
+        {
+          "scale": 30,
+          "cost": "random_ind",
+          "method": "FCP",
+          "field": "oos",
+          "raw": 54.62743535220252,
+          "paper": 54.627,
+          "matched": true
+        },
+        {
+          "scale": 30,
+          "cost": "random_ind",
+          "method": "BSP",
+          "field": "ins",
+          "raw": 46.391481355613095,
+          "paper": 46.391,
+          "matched": true
+        },
+        {
+          "scale": 30,
+          "cost": "random_ind",
+          "method": "BSP",
+          "field": "oos",
+          "raw": 44.43945012842282,
+          "paper": 44.439,
+          "matched": true
+        },
+        {
+          "scale": 30,
+          "cost": "random_corr",
+          "method": "FCP",
+          "field": "ins",
+          "raw": 83.12256254430801,
+          "paper": 83.123,
+          "matched": true
+        },
+        {
+          "scale": 30,
+          "cost": "random_corr",
+          "method": "FCP",
+          "field": "oos",
+          "raw": 79.11637704388497,
+          "paper": 79.116,
+          "matched": true
+        },
+        {
+          "scale": 30,
+          "cost": "random_corr",
+          "method": "BSP",
+          "field": "ins",
+          "raw": 81.18256393224719,
+          "paper": 81.183,
+          "matched": true
+        },
+        {
+          "scale": 30,
+          "cost": "random_corr",
+          "method": "BSP",
+          "field": "oos",
+          "raw": 77.38773271744449,
+          "paper": 77.388,
+          "matched": true
+        }
+      ]
+    },
+    "figure9": {
+      "passed": true,
+      "rows": 1080,
+      "non_runtime_bit_identical": false,
+      "accepted_exceptions": [
+        {
+          "key": [
+            "test_m30n10_1e_3",
+            "sample_data_64_size_10.msgpack",
+            "0.1",
+            "PCP"
+          ],
+          "field": "revenue_ratio",
+          "archived": "1.004751821452851",
+          "replay": "1.0060421929126016"
+        }
+      ],
+      "mismatches": []
+    },
+    "figure10": {
+      "passed": true,
+      "rows": 630,
+      "non_runtime_bit_identical": true,
+      "accepted_exceptions": [],
+      "mismatches": []
+    },
+    "figure11": {
+      "passed": true,
+      "instances": 60,
+      "successful": 489,
+      "accepted": 522,
+      "replay_paths_identical": true,
+      "checked_path_fields": [
+        "lp_to_milp_translation",
+        "lp_path",
+        "milp_path"
+      ],
+      "guarded_source_and_model": true
+    }
+  },
+  "passed": true
+}

@@ -1,0 +1,20 @@
+[project]
+name = "wine26-repro"
+version = "0.1.0"
+description = "Auditable reproduction package for Self-Improving Neural Pruning"
+requires-python = ">=3.9,<3.13"
+dependencies = [
+  "gurobipy==12.0.3",
+  "matplotlib==3.9.4",
+  "msgpack==1.1.2",
+  "msgpack-numpy==0.4.8",
+  "numpy==2.0.2",
+  "pandas==2.3.3",
+  "tensorboard==2.21.0",
+  "torch==2.8.0",
+  "torch-geometric==2.6.1",
+  "tqdm==4.67.3",
+]
+
+[tool.uv]
+package = false
