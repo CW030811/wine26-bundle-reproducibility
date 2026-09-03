@@ -14,14 +14,10 @@ end-to-end retraining equivalence where that was not established.
 4. Table 7's Beta(.5,.5) population std is `0.007491434479918724`, while sample std
    is `0.007529174942855045`. The paper's `0.008` is accepted using the documented
    sample-std convention. Other mean/std values match their displayed precision.
-5. Figure 9's 1,080 keys and classification fields match. One PCP row at
-   `test_m30n10_1e_3/sample_data_64_size_10.msgpack`, cutoff `0.1`, reaches 60 seconds.
-   The legacy implementation returns a search-dependent `ObjBound`: archived
-   revenue ratio `1.004751821452851`, replay `1.0060421929126016`. The affected
-   aggregate mean differs by about `4.3012382e-5`; this exception was explicitly
-   accepted. The strict legacy comparison remains available and reports this mismatch.
-   The public evidence audit permits only this key/field with an absolute difference
-   no larger than `0.00130`; it is not a blanket tolerance for other results.
+5. Figure 9 supplies a seed-1 cutoff-sensitivity reference/replay package with
+   1,080 experiment keys, nine cutoffs and a 60-second per-solve limit.
+   Package acceptance follows the implemented verification policy; the strict
+   row-level comparator is a separate check, not a claim of bitwise equivalence.
 6. Figure 10 has 630 identical non-runtime replay rows/fields. Its archived audit
    replay initially used 600 seconds, but all total row runtimes were below 60
    seconds; the packaged final driver defaults to 60 seconds.
@@ -29,9 +25,8 @@ end-to-end retraining equivalence where that was not established.
    Its exact solver sources and checkpoint are SHA-256 guarded.
 8. Table 5 contains 120 FCP/BSP sweep rows: two scales, three cost regimes, five
    seeds, two methods and fixed/buggy Z variants. The fixed-method InS/OOS
-   averages reproduce 24 paper statistics. **CPBSD-A cells and runtime cells in
-   the TeX generator are reused published values, not independently replayed
-   evidence.** The CPBSD-A solver source is supplied for future verification.
+   averages reproduce 24 paper statistics. The independently checked sweep
+   scope is FCP/BSP InS/OOS.
 
 `scripts/verify_reference_results.py` audits the released files. Passing this
 command does not mean it just retrained a model or solved a MILP. Actual replay

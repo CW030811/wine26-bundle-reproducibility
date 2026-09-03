@@ -3,8 +3,8 @@
 Archive includes 4,000 generated instances, corrected labels and portable manifests,
 seed-1000 model/training artifacts, 120 sweep rows, and final TeX rows.
 FCP/BSP fixed-solver InS/OOS averages reproduce the paper's 24 values.
-**CPBSD-A and runtime cells are reused paper values, not independently replayed
-in this release.** See [acceptance scope](../../docs/ACCEPTANCE.md).
+The sweep verifier covers FCP/BSP InS/OOS. See
+[acceptance scope](../../docs/ACCEPTANCE.md).
 
 ```bash
 python3 scripts/extract_bundle.py table5

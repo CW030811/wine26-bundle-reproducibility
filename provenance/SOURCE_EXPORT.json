@@ -226,7 +226,7 @@
   },
   "provenance/PORTABILITY_PATCHES.md": {
     "source_sha256": "a9f85f74bbc5f7d070559a4cc3488fa5cb22037fb2e1325da2984ba9084b1c50",
-    "published_sha256": "bb9f69edb67e64fae020ed9014dc3cb8560435b520edc74aac185e2ed7ca9449",
+    "published_sha256": "7e9c561e298b3ebc8549eb1be8a54a5235a239095cf914b49b7aa8f408235a6f",
     "changed_in_public_export": true
   },
   "provenance/codex_guard_sensitivity_latest_local_search_20260529.md": {

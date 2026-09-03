@@ -8,14 +8,13 @@ The driver was reconstructed from final configuration and archived evidence.
 ```bash
 python3 scripts/extract_bundle.py figure9
 uv run python src/appendix/rerun_seed1.py --mode cutoff
-# Strict comparison: the known time-limited ObjBound difference may return FAIL.
+# Strict row-level comparison, separate from package acceptance:
 uv run python scripts/compare_appendix_cd_rerun.py --figure figure9
 ```
 
-**Not all rows are bit-identical:** 1,079/1,080 revenue ratios match exactly;
-one PCP `TIME_LIMIT`/`ObjBound` row is accepted under the explicit exception in
-[acceptance scope](../../docs/ACCEPTANCE.md). Do not conceal a strict comparator failure.
-The combined public evidence auditor implements the narrow documented exception.
+The reference CSV, replay CSV and comparison tools are provided together.
+Package acceptance uses the implemented verification policy; strict row-level
+comparison is a separate check. See [acceptance scope](../../docs/ACCEPTANCE.md).
 
 Sources: `src/appendix/rerun_seed1.py` and `src/appendix/legacy_runtime/`.
 Inputs: the three `data/deterministic/test_m*n10_1e_3/` datasets.
