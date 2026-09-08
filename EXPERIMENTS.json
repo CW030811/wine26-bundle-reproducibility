@@ -15,7 +15,7 @@
   "experiments": [
     {
       "id": "table_2_main_comparison",
-      "paper_location": "Section 7 / Table 2",
+      "paper_location": "Section 6 / Table 2",
       "title": "Main comparison of FCP, PCP, FCPLS and BSP",
       "acceptance_basis": "Fresh complete replay covers 12 method-by-size cells: FCP/PCP/FCPLS each use 10 seeds by 100 samples and BSP uses 100 samples. All non-runtime profit mean/std values match at displayed precision or the explicitly bounded, user-approved rounding boundary tolerance; no samples failed.",
       "key": "table2",
@@ -161,7 +161,7 @@
       "id": "table_6_seed_robustness",
       "paper_location": "Appendix I / Table 6",
       "title": "Ten-seed training and FCP robustness",
-      "acceptance_basis": "Fresh 10-seed by 100-sample replay reproduces all 20 published loss values and all 20 published FCP profit mean/std values at displayed precision; runtime fields are excluded by policy.",
+      "acceptance_basis": "Archived training-loss records and a fresh 10-seed by 100-sample inference replay match 40 published values: 20 loss values and 20 FCP profit mean/std values at displayed precision; runtime fields are excluded by policy.",
       "key": "table6",
       "status": "ACCEPTED_WITH_DOCUMENTED_SCOPE",
       "archive": "bundles/table6.tar.gz",

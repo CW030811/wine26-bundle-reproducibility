@@ -980,8 +980,8 @@ def generate_progressive_bundles(selected_products, n):
 
 def main():
     dir_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "../.."))
-    model_path = os.path.join(dir_path, "models", "base_4layer", "best_model_edge_4layer_seed1.pt")
-    test_data_path = os.path.join(dir_path, "data", "deterministic", "test_BSP_m20n40_1e_3") + os.sep
+    model_path = os.path.join(dir_path, "models", "main_base_4layer_correct_lr_3", "best_model_edge_4layer_seed1.pt")
+    test_data_path = os.path.join(dir_path, "data", "deterministic", "test_BSP_m20n40_correct_1e_3") + os.sep
     result_path = 'test_result_PCP_cp_m10n20.csv'
     fcp_fallback_time_limit = 60.0
 

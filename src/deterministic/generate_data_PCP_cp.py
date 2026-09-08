@@ -516,11 +516,11 @@ if __name__ == "__main__":
         "--folder_name",
         type=str,
         default="train_PCP_m10n50_correct_4layer_seed9_lr3",
-        help="输出文件夹名称，位置固定在项目根目录下的 dataset/ 中。",
+        help="输出文件夹名称，位置固定在项目根目录下的 results/generated/ 中。",
     )
     args = parser.parse_args()
 
-    dir_path = os.path.dirname(os.path.abspath(__file__))
+    dir_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "../.."))
 
     m = 10
     num_layers = 4
@@ -532,7 +532,7 @@ if __name__ == "__main__":
     if torch.cuda.is_available():
         torch.cuda.manual_seed_all(seed)
 
-    model_dir = os.path.join(dir_path, "models_multi_layer_edge_update_correct_lr_3")
+    model_dir = os.path.join(dir_path, "models", "main_base_4layer_correct_lr_3")
     model_candidates = [
         os.path.join(model_dir, f"best_model_edge_{num_layers}layer_seed{seed}.pt"),
         os.path.join(model_dir, f"model_edge_{num_layers}layer_seed{seed}.pt"),
@@ -563,7 +563,7 @@ if __name__ == "__main__":
             50,
             51,
             3000,
-            os.path.join(dir_path, "dataset", args.folder_name),
+            os.path.join(dir_path, "results", "generated", args.folder_name),
             model_path,
             device,
             threshold,

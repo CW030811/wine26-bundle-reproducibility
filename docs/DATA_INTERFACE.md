@@ -56,7 +56,9 @@ Figure 6 reads its frozen 29-sample selection from
 `provenance/FIGURE6_SAMPLE_SELECTION.json`; it does not search for a new subset.
 The full 30-input replay is retained.
 
-Legacy source-level CLIs remain available. The supported public interfaces
-are `reproduce.py` and `data_pipeline.py`; old generator main blocks may retain
-historical demonstration settings. The wrappers call the same algorithm
+The supported public interfaces are `reproduce.py` and `data_pipeline.py`,
+plus the multi-model evaluator commands explicitly listed in the guides.
+Other source modules are imported algorithm implementations; their historical
+standalone demonstration or invariant-model modes are not release interfaces
+and may depend on unbundled assets. The wrappers call the same algorithm
 functions with explicit paths and recipe parameters.

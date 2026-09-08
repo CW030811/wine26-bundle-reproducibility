@@ -584,8 +584,7 @@ def main(use_web_gcn=False, web_results_path=None):
     # Set paths using hardcoded values
     # dir_path = BASE_DIR
     dir_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "../.."))
-    model_path = os.path.join(dir_path, "models", "base_4layer", "best_model_edge_4layer_seed1.pt")
-    # test_data_path = DATASET_PATHS.get('test_n10', os.path.join(BASE_DIR, "dataset_bundle/dataset/test/test_DLY/"))
+    model_path = os.path.join(dir_path, "models", "main_base_4layer_correct_lr_3", "best_model_edge_4layer_seed1.pt")
     # test_data_path = dir_path + '/dataset/test_m10n10_beta_half_half/'
     test_data_path = os.path.join(dir_path, "data", "ood", "test_m10n10_log_correct_1e_3")
     
@@ -647,7 +646,7 @@ def main(use_web_gcn=False, web_results_path=None):
     for i in range(sample_num):
         if dir_list[i] == '.DS_Store':
             continue
-        file_path = test_data_path + dir_list[i]
+        file_path = os.path.join(test_data_path, dir_list[i])
         try:
             dat, miscellaneous = process_data(file_path)
             test_dataset.append(dat)
