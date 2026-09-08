@@ -1,0 +1,19 @@
+name: Reproduction package checks
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  reference-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          python-version: '3.11'
+      - run: uv sync --frozen
+      - run: uv run python scripts/reproduce.py prepare all
+      - run: uv run python -m unittest discover -s tests
+      - run: uv run python scripts/reproduce.py verify all --reference
+      - run: uv run python scripts/verify_generation.py
+      - run: uv run python scripts/audit_release.py

@@ -1,8 +1,8 @@
 {
   "passed": true,
   "scope": "Known personal identifiers, local home/temp paths, email, license IDs, common token/private-key patterns; structured msgpack/checkpoint strings",
-  "archive_members_checked": 12631,
-  "checkpoint_containers_checked": 35,
+  "archive_members_checked": 18179,
+  "checkpoint_containers_checked": 95,
   "findings": [],
   "source_equivalence": [
     {

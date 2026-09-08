@@ -5,11 +5,12 @@ Python/solver versions, solver status, input/model hashes, and observed vs expec
 non-runtime values. Do not include license files, tokens, personal paths or raw
 machine logs containing credentials.
 
-To promote a pending experiment:
+To update or extend an experiment:
 
 1. Finish the complete planned sample/seed grid using final inputs and checkpoints.
 2. Check completeness, failures, solver limits, means/std and per-row evidence.
-3. Document every accepted exception; do not select a favorable subset just to match a table.
+3. Record the accepted scope and freeze sample identities before a new replay.
+   Do not dynamically reselect samples in a validation run.
 4. Add the final archive, per-member SHA-256 inventory, experiment guide and verifier.
 5. Update `EXPERIMENTS.json`, the README status table and release checksums.
 6. Run archive tests, existing unit tests, and the numerical reference audit in a fresh checkout.

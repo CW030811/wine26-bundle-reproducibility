@@ -58,7 +58,7 @@ class VerifyMainResultsTest(unittest.TestCase):
                 writer.writerow({"seed": 1, "revenue_ratio": 0.5, "total_time": 123.0})
                 writer.writerow({"seed": 1, "revenue_ratio": 1.0, "total_time": 456.0})
 
-            report = module.verify_table6(published, summary, results)
+            report = module.verify_table6(published, summary, results, require_complete=False)
 
         self.assertTrue(report["passed"])
         self.assertEqual(report["checked_seeds"], 1)
@@ -107,7 +107,7 @@ class VerifyMainResultsTest(unittest.TestCase):
                 hasattr(module, "verify_table7"),
                 "main-result verifier must expose Table 7 verification",
             )
-            report = module.verify_table7(published, result_paths)
+            report = module.verify_table7(published, result_paths, require_complete=False)
 
         self.assertTrue(report["passed"])
         self.assertEqual(report["checked_variants"], 4)

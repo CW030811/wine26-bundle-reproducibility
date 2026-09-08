@@ -1,0 +1,22 @@
+{
+  "scope": "Decoded input values only; no label optimization or model retraining",
+  "random": {
+    "instances": 4000,
+    "unique_seeds": 4000,
+    "mismatches": [],
+    "passed": true
+  },
+  "self_improved": {
+    "instances": 3000,
+    "seed": 9,
+    "checked_fields": [
+      "unit_cs",
+      "ship_cs",
+      "unit_us",
+      "Ns"
+    ],
+    "mismatches": [],
+    "passed": true
+  },
+  "passed": true
+}

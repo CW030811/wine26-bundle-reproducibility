@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "archives": 15,
+  "archive_members_checked": 18179,
+  "checkpoint_containers_checked": 95,
+  "findings": [],
+  "scope": "Hashes, archive paths and decoded metadata strings; no pickle execution",
+  "identity_policy": "Personal home paths, emails, license IDs and credentials excluded. Public GitHub owner identity retained."
+}

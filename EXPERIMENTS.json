@@ -14,191 +14,6 @@
   },
   "experiments": [
     {
-      "id": "table_5_random_valuation",
-      "paper_location": "Section 7 / Table 5",
-      "title": "Additive random-valuation experiment with corrected Z lower bound",
-      "acceptance_basis": "Corrected Z-fix data, labels, training artifacts, checkpoint, a 120-row FCP/BSP sweep and final TeX rows are archived. The independently checked sweep covers 24 FCP/BSP InS/OOS statistics.",
-      "key": "table5",
-      "status": "ACCEPTED_WITH_DOCUMENTED_SCOPE",
-      "archive": "bundles/table5.tar.gz",
-      "source_paths": [
-        {
-          "path": "src/random_valuation",
-          "type": "directory",
-          "expected_files": 11
-        }
-      ],
-      "commands": [
-        "uv run python src/random_valuation/Training_multi_layer_cpbsd_mb_x.py --device cpu",
-        "uv run python src/random_valuation/run_experiment_zfix.py --model-path artifacts/random_valuation/models/best_model_edge_cpbsd_mb_x_2layer_seed1000.pt --out-csv results/table5/experiment_zfix.csv"
-      ]
-    },
-    {
-      "id": "figure_9_cutoff_sensitivity",
-      "paper_location": "Appendix C / Figure 9",
-      "title": "FCP/PCP cutoff sensitivity",
-      "acceptance_basis": "Final seed-1 inputs, reconstructed driver, reference CSV and replay CSV are packaged. Acceptance follows the implemented verification policy; strict row-level comparison is provided separately.",
-      "key": "figure9",
-      "status": "ACCEPTED_WITH_DOCUMENTED_SCOPE",
-      "archive": "bundles/figure9.tar.gz",
-      "source_paths": [
-        {
-          "path": "src/appendix/rerun_seed1.py",
-          "type": "file"
-        },
-        {
-          "path": "src/appendix/legacy_runtime/test_FCP.py",
-          "type": "file"
-        },
-        {
-          "path": "src/appendix/legacy_runtime/test_PCP.py",
-          "type": "file"
-        },
-        {
-          "path": "src/appendix/legacy_runtime/test_FCPLS_score.py",
-          "type": "file"
-        }
-      ],
-      "commands": [
-        "uv run python src/appendix/rerun_seed1.py --mode cutoff",
-        "uv run python scripts/compare_appendix_cd_rerun.py --figure figure9"
-      ]
-    },
-    {
-      "id": "figure_10_k_sensitivity",
-      "paper_location": "Appendix D / Figure 10",
-      "title": "FCPLS candidate-budget K sensitivity",
-      "acceptance_basis": "Full 630-row replay has identical experiment keys and every non-runtime result field; canonical non-runtime SHA-256 is identical.",
-      "key": "figure10",
-      "status": "ACCEPTED_WITH_DOCUMENTED_SCOPE",
-      "archive": "bundles/figure10.tar.gz",
-      "source_paths": [
-        {
-          "path": "src/appendix/rerun_seed1.py",
-          "type": "file"
-        },
-        {
-          "path": "src/appendix/legacy_runtime/test_FCP.py",
-          "type": "file"
-        },
-        {
-          "path": "src/appendix/legacy_runtime/test_PCP.py",
-          "type": "file"
-        },
-        {
-          "path": "src/appendix/legacy_runtime/test_FCPLS_score.py",
-          "type": "file"
-        }
-      ],
-      "commands": [
-        "uv run python src/appendix/rerun_seed1.py --mode k",
-        "uv run python scripts/compare_appendix_cd_rerun.py --figure figure10"
-      ]
-    },
-    {
-      "id": "figure_11_lp_milp_translation",
-      "paper_location": "Appendix E / Figure 11",
-      "title": "LP-to-restricted-MILP move translation verification",
-      "acceptance_basis": "Exact 60 inputs, seed-1 checkpoint, guarded cached-LP source and full replay reproduce 489/522 translations with identical per-instance paths and statistics.",
-      "key": "figure11",
-      "status": "ACCEPTED_WITH_DOCUMENTED_SCOPE",
-      "archive": "bundles/figure11.tar.gz",
-      "source_paths": [
-        {
-          "path": "src/appendix_rerun/run_guarded_sensitivity.py",
-          "type": "file"
-        },
-        {
-          "path": "src/test/test_FCPLS_score_cached_lp.py",
-          "type": "file"
-        },
-        {
-          "path": "src/test/test_FCPLS_score_cached_lp_1.py",
-          "type": "file"
-        },
-        {
-          "path": "src/report/replot_verification_paths.py",
-          "type": "file"
-        }
-      ],
-      "commands": [
-        "uv run python src/appendix_rerun/run_guarded_sensitivity.py --experiment lp_milp --output-dir results/appendix_e_replay --layer 4 --seed 1 --lp-milp-samples 10 --max-iterations 50 --tolerance 1e-6",
-        "uv run python src/report/replot_verification_paths.py"
-      ]
-    },
-    {
-      "id": "table_6_seed_robustness",
-      "paper_location": "Appendix I / Table 6",
-      "title": "Ten-seed training and FCP robustness",
-      "acceptance_basis": "Fresh 10-seed by 100-sample replay reproduces all 20 published loss values and all 20 published FCP profit mean/std values at displayed precision; runtime fields are excluded by policy.",
-      "key": "table6",
-      "status": "ACCEPTED_WITH_DOCUMENTED_SCOPE",
-      "archive": "bundles/table6.tar.gz",
-      "source_paths": [
-        {
-          "path": "src/deterministic/Training_multi_layer.py",
-          "type": "file"
-        },
-        {
-          "path": "src/deterministic/test_FCP.py",
-          "type": "file"
-        },
-        {
-          "path": "src/deterministic/test_FCP_multi_model_avg.py",
-          "type": "file"
-        },
-        {
-          "path": "scripts/verify_main_results.py",
-          "type": "file"
-        }
-      ],
-      "commands": [
-        "uv run python src/deterministic/test_FCP_multi_model_avg.py --data_dir . --test_subdirs data/deterministic/test_m10n10_correct_1e_3 --model_dir models/main_base_4layer_correct_lr_3 --layers 4 --seeds 1,2,3,4,5,6,7,8,9,10 --result_dir results/main_exact_rerun/table6",
-        "uv run python scripts/verify_main_results.py --experiment table6"
-      ]
-    },
-    {
-      "id": "table_7_ood_robustness",
-      "paper_location": "Appendix J / Table 7",
-      "title": "OOD robustness under four valuation distributions",
-      "acceptance_basis": "Fresh four-variant, ten-seed replay reproduces all eight published non-runtime profit mean/std values at displayed precision; the documented Beta(.5,.5) std convention boundary is user-accepted.",
-      "key": "table7",
-      "status": "ACCEPTED_WITH_DOCUMENTED_SCOPE",
-      "archive": "bundles/table7.tar.gz",
-      "source_paths": [
-        {
-          "path": "src/deterministic/test_FCP_multi_model_avg.py",
-          "type": "file"
-        },
-        {
-          "path": "src/deterministic/test_FCP_multi_model_avg_log.py",
-          "type": "file"
-        },
-        {
-          "path": "src/deterministic/test_FCP_multi_model_avg_f33.py",
-          "type": "file"
-        },
-        {
-          "path": "src/deterministic/test_FCP_log.py",
-          "type": "file"
-        },
-        {
-          "path": "src/deterministic/test_FCP_f33.py",
-          "type": "file"
-        },
-        {
-          "path": "scripts/verify_main_results.py",
-          "type": "file"
-        }
-      ],
-      "commands": [
-        "uv run python src/deterministic/test_FCP_multi_model_avg.py --data_dir . --test_subdirs 'data/ood/test_m10n10_beta_5_5_correct_1e_3;data/ood/test_m10n10_beta_half_half_correct_1e_3' --model_dir models/main_base_4layer_correct_lr_3 --result_dir results/main_exact_rerun/table7/beta",
-        "uv run python src/deterministic/test_FCP_multi_model_avg_log.py --data_dir . --test_subdirs data/ood/test_m10n10_log_correct_1e_3 --model_dir models/main_base_4layer_correct_lr_3 --result_dir results/main_exact_rerun/table7/log",
-        "uv run python src/deterministic/test_FCP_multi_model_avg_f33.py --data_dir . --test_subdirs data/ood/test_m10n10_f0.33_correct_1e_3 --model_dir models/main_base_4layer_correct_lr_3 --result_dir results/main_exact_rerun/table7/cube_root",
-        "uv run python scripts/verify_main_results.py --experiment table7"
-      ]
-    },
-    {
       "id": "table_2_main_comparison",
       "paper_location": "Section 7 / Table 2",
       "title": "Main comparison of FCP, PCP, FCPLS and BSP",
@@ -241,9 +56,390 @@
         }
       ],
       "commands": [
-        "uv run python scripts/run_table2_exact.py",
-        "uv run python scripts/verify_main_results.py --experiment table2"
-      ]
+        "uv run python scripts/reproduce.py prepare table2",
+        "uv run python scripts/reproduce.py verify table2 --reference",
+        "uv run python scripts/reproduce.py replay table2",
+        "uv run python scripts/reproduce.py plot table2"
+      ],
+      "entrypoint": "uv run python scripts/reproduce.py replay table2",
+      "published_scope": "FCP, PCP, FCPLS and BSP on three sizes; 12 method/size cells."
+    },
+    {
+      "key": "table3",
+      "id": "table3",
+      "paper_location": "Table 3",
+      "title": "Large-instance base-method comparison",
+      "status": "ACCEPTED_WITH_DOCUMENTED_SCOPE",
+      "archive": "bundles/table3.tar.gz",
+      "acceptance_basis": "Full per-sample replay; 17 method/dataset cells checked; runtime excluded.",
+      "source_paths": [
+        {
+          "path": "scripts/run_remaining_exact.py",
+          "type": "file"
+        },
+        {
+          "path": "scripts/verify_remaining_results.py",
+          "type": "file"
+        },
+        {
+          "path": "src/deterministic",
+          "type": "directory",
+          "expected_files": 20
+        }
+      ],
+      "commands": [
+        "uv run python scripts/reproduce.py prepare table3",
+        "uv run python scripts/reproduce.py verify table3 --reference",
+        "uv run python scripts/reproduce.py replay table3",
+        "uv run python scripts/reproduce.py plot table3"
+      ],
+      "entrypoint": "uv run python scripts/reproduce.py replay table3",
+      "published_scope": "Base FCP/PCP/FCPLS on six larger sizes; 17 reported method/size cells."
+    },
+    {
+      "key": "table4",
+      "id": "table4",
+      "paper_location": "Table 4",
+      "title": "Self-improved methods on larger instances",
+      "status": "ACCEPTED_WITH_DOCUMENTED_SCOPE",
+      "archive": "bundles/table4.tar.gz",
+      "acceptance_basis": "Full per-sample replay; 15 method/dataset cells checked; runtime excluded.",
+      "source_paths": [
+        {
+          "path": "scripts/run_remaining_exact.py",
+          "type": "file"
+        },
+        {
+          "path": "scripts/verify_remaining_results.py",
+          "type": "file"
+        },
+        {
+          "path": "src/deterministic",
+          "type": "directory",
+          "expected_files": 20
+        }
+      ],
+      "commands": [
+        "uv run python scripts/reproduce.py prepare table4",
+        "uv run python scripts/reproduce.py verify table4 --reference",
+        "uv run python scripts/reproduce.py replay table4",
+        "uv run python scripts/reproduce.py plot table4"
+      ],
+      "training_dependencies": [
+        "training_self_1",
+        "training_self_2",
+        "training_self_3"
+      ],
+      "entrypoint": "uv run python scripts/reproduce.py replay table4",
+      "published_scope": "Self-improved FCP-I/PCP-I/FCPLS-I on six larger sizes; 15 reported cells."
+    },
+    {
+      "id": "table_5_random_valuation",
+      "paper_location": "Section 7 / Table 5",
+      "title": "Additive random-valuation experiment with corrected Z lower bound",
+      "acceptance_basis": "Corrected Z-fix data, labels, training artifacts, checkpoint, a 120-row FCP/BSP sweep and final TeX rows are archived. The independently checked sweep covers 24 FCP/BSP InS/OOS statistics.",
+      "key": "table5",
+      "status": "ACCEPTED_WITH_DOCUMENTED_SCOPE",
+      "archive": "bundles/table5.tar.gz",
+      "source_paths": [
+        {
+          "path": "src/random_valuation",
+          "type": "directory",
+          "expected_files": 11
+        }
+      ],
+      "commands": [
+        "uv run python scripts/reproduce.py prepare table5",
+        "uv run python scripts/reproduce.py verify table5 --reference",
+        "uv run python scripts/reproduce.py replay table5",
+        "uv run python scripts/reproduce.py plot table5"
+      ],
+      "entrypoint": "uv run python scripts/reproduce.py replay table5",
+      "published_scope": "Corrected FCP/BSP random-valuation sweep; 24 InS/OOS statistics."
+    },
+    {
+      "id": "table_6_seed_robustness",
+      "paper_location": "Appendix I / Table 6",
+      "title": "Ten-seed training and FCP robustness",
+      "acceptance_basis": "Fresh 10-seed by 100-sample replay reproduces all 20 published loss values and all 20 published FCP profit mean/std values at displayed precision; runtime fields are excluded by policy.",
+      "key": "table6",
+      "status": "ACCEPTED_WITH_DOCUMENTED_SCOPE",
+      "archive": "bundles/table6.tar.gz",
+      "source_paths": [
+        {
+          "path": "src/deterministic/Training_multi_layer.py",
+          "type": "file"
+        },
+        {
+          "path": "src/deterministic/test_FCP.py",
+          "type": "file"
+        },
+        {
+          "path": "src/deterministic/test_FCP_multi_model_avg.py",
+          "type": "file"
+        },
+        {
+          "path": "scripts/verify_main_results.py",
+          "type": "file"
+        }
+      ],
+      "commands": [
+        "uv run python scripts/reproduce.py prepare table6",
+        "uv run python scripts/reproduce.py verify table6 --reference",
+        "uv run python scripts/reproduce.py replay table6",
+        "uv run python scripts/reproduce.py plot table6"
+      ],
+      "entrypoint": "uv run python scripts/reproduce.py replay table6",
+      "published_scope": "Ten-seed FCP replay plus archived training-loss records; 40 reported values."
+    },
+    {
+      "id": "table_7_ood_robustness",
+      "paper_location": "Appendix J / Table 7",
+      "title": "OOD robustness under four valuation distributions",
+      "acceptance_basis": "Fresh four-variant, ten-seed replay reproduces all eight published non-runtime profit mean/std values at displayed precision; the documented Beta(.5,.5) std convention boundary is user-accepted.",
+      "key": "table7",
+      "status": "ACCEPTED_WITH_DOCUMENTED_SCOPE",
+      "archive": "bundles/table7.tar.gz",
+      "source_paths": [
+        {
+          "path": "src/deterministic/test_FCP_multi_model_avg.py",
+          "type": "file"
+        },
+        {
+          "path": "src/deterministic/test_FCP_multi_model_avg_log.py",
+          "type": "file"
+        },
+        {
+          "path": "src/deterministic/test_FCP_multi_model_avg_f33.py",
+          "type": "file"
+        },
+        {
+          "path": "src/deterministic/test_FCP_log.py",
+          "type": "file"
+        },
+        {
+          "path": "src/deterministic/test_FCP_f33.py",
+          "type": "file"
+        },
+        {
+          "path": "scripts/verify_main_results.py",
+          "type": "file"
+        }
+      ],
+      "commands": [
+        "uv run python scripts/reproduce.py prepare table7",
+        "uv run python scripts/reproduce.py verify table7 --reference",
+        "uv run python scripts/reproduce.py replay table7",
+        "uv run python scripts/reproduce.py plot table7"
+      ],
+      "entrypoint": "uv run python scripts/reproduce.py replay table7",
+      "published_scope": "Four OOD distributions, 100 samples and ten base seeds per distribution."
+    },
+    {
+      "key": "figure6",
+      "id": "figure6",
+      "paper_location": "Figure 6",
+      "title": "Customer-count scalability",
+      "status": "ACCEPTED_WITH_DOCUMENTED_SCOPE",
+      "archive": "bundles/figure6.tar.gz",
+      "acceptance_basis": "Maintainer-accepted fixed subset in provenance/FIGURE6_SAMPLE_SELECTION.json; every replay uses the frozen list. All 30 inputs and full 300-row replay remain included.",
+      "source_paths": [
+        {
+          "path": "scripts/run_remaining_exact.py",
+          "type": "file"
+        },
+        {
+          "path": "scripts/verify_remaining_results.py",
+          "type": "file"
+        },
+        {
+          "path": "src/deterministic",
+          "type": "directory",
+          "expected_files": 20
+        }
+      ],
+      "commands": [
+        "uv run python scripts/reproduce.py prepare figure6",
+        "uv run python scripts/reproduce.py verify figure6 --reference",
+        "uv run python scripts/reproduce.py replay figure6",
+        "uv run python scripts/reproduce.py plot figure6"
+      ],
+      "entrypoint": "uv run python scripts/reproduce.py replay figure6",
+      "published_scope": "Customer-count scalability; fixed 29-sample m=80 evaluation subset and archived BSP normalization."
+    },
+    {
+      "key": "figure7",
+      "id": "figure7",
+      "paper_location": "Figure 7",
+      "title": "Product-count scalability",
+      "status": "ACCEPTED_WITH_DOCUMENTED_SCOPE",
+      "archive": "bundles/figure7.tar.gz",
+      "acceptance_basis": "Full per-sample replay; 12 method/dataset cells checked; runtime excluded.",
+      "source_paths": [
+        {
+          "path": "scripts/run_remaining_exact.py",
+          "type": "file"
+        },
+        {
+          "path": "scripts/verify_remaining_results.py",
+          "type": "file"
+        },
+        {
+          "path": "src/deterministic",
+          "type": "directory",
+          "expected_files": 20
+        }
+      ],
+      "commands": [
+        "uv run python scripts/reproduce.py prepare figure7",
+        "uv run python scripts/reproduce.py verify figure7 --reference",
+        "uv run python scripts/reproduce.py replay figure7",
+        "uv run python scripts/reproduce.py plot figure7"
+      ],
+      "entrypoint": "uv run python scripts/reproduce.py replay figure7",
+      "published_scope": "Product-count scalability; FCP/PCP/BSP, 12 curve points."
+    },
+    {
+      "key": "figure8",
+      "id": "figure8",
+      "paper_location": "Figure 8",
+      "title": "Base versus self-improved methods",
+      "status": "ACCEPTED_WITH_DOCUMENTED_SCOPE",
+      "archive": "bundles/figure8.tar.gz",
+      "acceptance_basis": "Full per-sample replay; 20 method/dataset cells checked; runtime excluded.",
+      "source_paths": [
+        {
+          "path": "scripts/run_remaining_exact.py",
+          "type": "file"
+        },
+        {
+          "path": "scripts/verify_remaining_results.py",
+          "type": "file"
+        },
+        {
+          "path": "src/deterministic",
+          "type": "directory",
+          "expected_files": 20
+        }
+      ],
+      "commands": [
+        "uv run python scripts/reproduce.py prepare figure8",
+        "uv run python scripts/reproduce.py verify figure8 --reference",
+        "uv run python scripts/reproduce.py replay figure8",
+        "uv run python scripts/reproduce.py plot figure8"
+      ],
+      "training_dependencies": [
+        "training_self_1",
+        "training_self_2",
+        "training_self_3"
+      ],
+      "entrypoint": "uv run python scripts/reproduce.py replay figure8",
+      "published_scope": "Base and self-improved comparison; all five curves, 20 curve points."
+    },
+    {
+      "id": "figure_9_cutoff_sensitivity",
+      "paper_location": "Appendix C / Figure 9",
+      "title": "FCP/PCP cutoff sensitivity",
+      "acceptance_basis": "Final seed-1 inputs, reconstructed driver, reference CSV and replay CSV are packaged. Acceptance follows the implemented verification policy; strict row-level comparison is provided separately.",
+      "key": "figure9",
+      "status": "ACCEPTED_WITH_DOCUMENTED_SCOPE",
+      "archive": "bundles/figure9.tar.gz",
+      "source_paths": [
+        {
+          "path": "src/appendix/rerun_seed1.py",
+          "type": "file"
+        },
+        {
+          "path": "src/appendix/legacy_runtime/test_FCP.py",
+          "type": "file"
+        },
+        {
+          "path": "src/appendix/legacy_runtime/test_PCP.py",
+          "type": "file"
+        },
+        {
+          "path": "src/appendix/legacy_runtime/test_FCPLS_score.py",
+          "type": "file"
+        }
+      ],
+      "commands": [
+        "uv run python scripts/reproduce.py prepare figure9",
+        "uv run python scripts/reproduce.py verify figure9 --reference",
+        "uv run python scripts/reproduce.py replay figure9",
+        "uv run python scripts/reproduce.py plot figure9"
+      ],
+      "entrypoint": "uv run python scripts/reproduce.py replay figure9",
+      "published_scope": "Seed-1 cutoff sensitivity with 1,080 reference/replay keys."
+    },
+    {
+      "id": "figure_10_k_sensitivity",
+      "paper_location": "Appendix D / Figure 10",
+      "title": "FCPLS candidate-budget K sensitivity",
+      "acceptance_basis": "Full 630-row replay has identical experiment keys and every non-runtime result field; canonical non-runtime SHA-256 is identical.",
+      "key": "figure10",
+      "status": "ACCEPTED_WITH_DOCUMENTED_SCOPE",
+      "archive": "bundles/figure10.tar.gz",
+      "source_paths": [
+        {
+          "path": "src/appendix/rerun_seed1.py",
+          "type": "file"
+        },
+        {
+          "path": "src/appendix/legacy_runtime/test_FCP.py",
+          "type": "file"
+        },
+        {
+          "path": "src/appendix/legacy_runtime/test_PCP.py",
+          "type": "file"
+        },
+        {
+          "path": "src/appendix/legacy_runtime/test_FCPLS_score.py",
+          "type": "file"
+        }
+      ],
+      "commands": [
+        "uv run python scripts/reproduce.py prepare figure10",
+        "uv run python scripts/reproduce.py verify figure10 --reference",
+        "uv run python scripts/reproduce.py replay figure10",
+        "uv run python scripts/reproduce.py plot figure10"
+      ],
+      "entrypoint": "uv run python scripts/reproduce.py replay figure10",
+      "published_scope": "Candidate-budget sensitivity with 630 non-runtime replay rows."
+    },
+    {
+      "id": "figure_11_lp_milp_translation",
+      "paper_location": "Appendix E / Figure 11",
+      "title": "LP-to-restricted-MILP move translation verification",
+      "acceptance_basis": "Exact 60 inputs, seed-1 checkpoint, guarded cached-LP source and full replay reproduce 489/522 translations with identical per-instance paths and statistics.",
+      "key": "figure11",
+      "status": "ACCEPTED_WITH_DOCUMENTED_SCOPE",
+      "archive": "bundles/figure11.tar.gz",
+      "source_paths": [
+        {
+          "path": "src/appendix_rerun/run_guarded_sensitivity.py",
+          "type": "file"
+        },
+        {
+          "path": "src/test/test_FCPLS_score_cached_lp.py",
+          "type": "file"
+        },
+        {
+          "path": "src/test/test_FCPLS_score_cached_lp_1.py",
+          "type": "file"
+        },
+        {
+          "path": "src/report/replot_verification_paths.py",
+          "type": "file"
+        }
+      ],
+      "commands": [
+        "uv run python scripts/reproduce.py prepare figure11",
+        "uv run python scripts/reproduce.py verify figure11 --reference",
+        "uv run python scripts/reproduce.py replay figure11",
+        "uv run python scripts/reproduce.py plot figure11"
+      ],
+      "entrypoint": "uv run python scripts/reproduce.py replay figure11",
+      "published_scope": "Sixty-instance LP/MILP path replay; 489 of 522 accepted moves translate."
     }
   ]
 }

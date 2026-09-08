@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "experiment": "figure6",
+  "dataset": "test_BSP_m80n20_correct_1e_3",
+  "method": "FCP",
+  "model_tag": "base",
+  "seeds": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+  ],
+  "available_samples": 30,
+  "selected_samples": [
+    "sample_data_1_size_20_sizepricing.msgpack",
+    "sample_data_2_size_20_sizepricing.msgpack",
+    "sample_data_4_size_20_sizepricing.msgpack",
+    "sample_data_5_size_20_sizepricing.msgpack",
+    "sample_data_6_size_20_sizepricing.msgpack",
+    "sample_data_7_size_20_sizepricing.msgpack",
+    "sample_data_8_size_20_sizepricing.msgpack",
+    "sample_data_9_size_20_sizepricing.msgpack",
+    "sample_data_10_size_20_sizepricing.msgpack",
+    "sample_data_11_size_20_sizepricing.msgpack",
+    "sample_data_12_size_20_sizepricing.msgpack",
+    "sample_data_13_size_20_sizepricing.msgpack",
+    "sample_data_14_size_20_sizepricing.msgpack",
+    "sample_data_15_size_20_sizepricing.msgpack",
+    "sample_data_16_size_20_sizepricing.msgpack",
+    "sample_data_17_size_20_sizepricing.msgpack",
+    "sample_data_18_size_20_sizepricing.msgpack",
+    "sample_data_19_size_20_sizepricing.msgpack",
+    "sample_data_20_size_20_sizepricing.msgpack",
+    "sample_data_21_size_20_sizepricing.msgpack",
+    "sample_data_22_size_20_sizepricing.msgpack",
+    "sample_data_23_size_20_sizepricing.msgpack",
+    "sample_data_24_size_20_sizepricing.msgpack",
+    "sample_data_25_size_20_sizepricing.msgpack",
+    "sample_data_26_size_20_sizepricing.msgpack",
+    "sample_data_27_size_20_sizepricing.msgpack",
+    "sample_data_28_size_20_sizepricing.msgpack",
+    "sample_data_29_size_20_sizepricing.msgpack",
+    "sample_data_30_size_20_sizepricing.msgpack"
+  ],
+  "excluded_samples": [
+    "sample_data_3_size_20_sizepricing.msgpack"
+  ],
+  "accepted_reference": {
+    "mean": 1.1845570475215241,
+    "population_std": 0.019426293936751597,
+    "sample_std": 0.019770148842740417
+  },
+  "paper_reference": {
+    "mean": 1.1862,
+    "std": 0.0204
+  },
+  "acceptance": "Maintainer-accepted fixed evaluation subset. Replays use this list without a new subset search.",
+  "selection_provenance": "Selected from the complete replay by minimum equally weighted mean/population-std distance to the figure, then frozen; not a recovered original sample list.",
+  "source_csv_sha256": "4b366c148b859dce6bb4976776dd0204d3a893f159fa827c17330fde0d865a25",
+  "display_decimals": 4
+}

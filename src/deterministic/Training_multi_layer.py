@@ -268,7 +268,7 @@ def _attach_edge_labels_to_data(data, meta):
 
 def train(
     data_dir: str = os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")),
-    train_subdir: str = "data/training_base_MISSING",
+    train_subdir: str = "data/deterministic/train_m10n10_correct_1e_3",
     model_subdir: str = "results/base_training/models",
     charts_subdir: str = "results/base_training/charts",
     log_subdir: str = "results/base_training/logs",
@@ -610,7 +610,7 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(description="Train multi-layer EdgeScoringGCN models with different seeds")
     parser.add_argument("--data_dir", type=str, default=os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))
-    parser.add_argument("--train_subdir", type=str, default="data/training_base_MISSING")
+    parser.add_argument("--train_subdir", type=str, default="data/deterministic/train_m10n10_correct_1e_3")
     parser.add_argument("--model_subdir", type=str, default="results/base_training/models", help="模型保存目录")
     parser.add_argument("--charts_subdir", type=str, default="results/base_training/charts", help="训练曲线保存目录")
     parser.add_argument("--log_subdir", type=str, default="results/base_training/logs", help="TensorBoard日志目录")

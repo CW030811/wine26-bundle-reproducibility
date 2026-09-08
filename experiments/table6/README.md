@@ -1,19 +1,26 @@
-# Table 6 — ten-seed robustness
+# Table 6 — Ten-seed training and FCP robustness
 
-Archive includes 3,000 final labeled training instances, 100 test instances,
-ten models with loss histories, and 1,000 seed×sample FCP replay rows.
-Forty reported loss/profit values match; training-loss checks use the archived
-records, not a fresh training run. [Detailed evidence](../../provenance/TABLE6_EXACT_REPRO.md).
+Ten-seed FCP replay plus archived training-loss records; 40 reported values.
 
 ```bash
-python3 scripts/extract_bundle.py table6
-uv run python scripts/verify_main_results.py --experiment table6
-uv run python src/deterministic/test_FCP_multi_model_avg.py \
-  --data_dir . --test_subdirs data/deterministic/test_m10n10_correct_1e_3 \
-  --model_dir models/main_base_4layer_correct_lr_3 --layers 4 \
-  --seeds 1,2,3,4,5,6,7,8,9,10 --result_dir results/main_exact_rerun/table6
-uv run python scripts/verify_main_results.py --experiment table6
+uv run python scripts/reproduce.py prepare table6
+uv run python scripts/reproduce.py verify table6 --reference
+# Full optimizer replay; can take hours or days:
+uv run python scripts/reproduce.py replay table6
+uv run python scripts/reproduce.py plot table6
 ```
 
-See [training instructions](../../docs/TRAINING_AND_DATA.md) for an independent
-retraining entry point. Archived checkpoints are the paper replay reference.
+Use `--dry-run` to inspect the replay commands. New outputs are under
+`results/reproduced/table6/`: native result files, `verification.json`,
+`statistics.csv`, and `plots/`. Use `plot table6 --reference` to plot the
+packaged replay without solving again. Figure files are regenerated from
+data; pixel-identical PDF/PNG rendering across platforms is not required.
+
+Data archive: [bundles/table6.tar.gz](../../bundles/table6.tar.gz).
+The complete per-file inventory and SHA-256 values are in
+[bundles/manifest.json](../../bundles/manifest.json). Sources, scope and commands
+are indexed in [EXPERIMENTS.json](../../EXPERIMENTS.json).
+
+See [data and training](../../docs/TRAINING_AND_DATA.md),
+[interface contract](../../docs/DATA_INTERFACE.md), and
+[acceptance policy](../../docs/ACCEPTANCE.md).

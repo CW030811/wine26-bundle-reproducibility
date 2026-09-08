@@ -1,26 +1,26 @@
-# Figure 11 — LP-to-MILP move translation
+# Figure 11 — LP-to-restricted-MILP move translation verification
 
-Sixty exact selected inputs (ten from each of six datasets), seed-1 model,
-50 maximum iterations, tolerance `1e-6`. Reference and replay translation vectors
-and paths match; 489 of 522 accepted LP moves translate successfully.
+Sixty-instance LP/MILP path replay; 489 of 522 accepted moves translate.
 
 ```bash
-python3 scripts/extract_bundle.py figure11
-uv run python src/appendix_rerun/run_guarded_sensitivity.py \
-  --experiment lp_milp --output-dir results/appendix_e_replay \
-  --layer 4 --seed 1 --lp-milp-samples 10 \
-  --max-iterations 50 --tolerance 1e-6
-uv run python src/report/replot_verification_paths.py
+uv run python scripts/reproduce.py prepare figure11
+uv run python scripts/reproduce.py verify figure11 --reference
+# Full optimizer replay; can take hours or days:
+uv run python scripts/reproduce.py replay figure11
+uv run python scripts/reproduce.py plot figure11
 ```
 
-Inputs: `Dataset/`; model: `models_multi_layer_edge_update/best_model_edge_4layer_seed1.pt`.
-Sources: guarded `src/test/test_FCPLS_score_cached_lp*.py` and
-`src/appendix_rerun/run_guarded_sensitivity.py`. The two identical compatibility
-source copies are deliberately retained because the runner validates both hashes.
-The public sources replace the historical personal CLI fallback with the current
-directory. Guard hashes were updated for this path-only change; use the top-level
-runner above, which resolves all actual inputs relative to this repository.
+Use `--dry-run` to inspect the replay commands. New outputs are under
+`results/reproduced/figure11/`: native result files, `verification.json`,
+`statistics.csv`, and `plots/`. Use `plot figure11 --reference` to plot the
+packaged replay without solving again. Figure files are regenerated from
+data; pixel-identical PDF/PNG rendering across platforms is not required.
 
-Reference artifacts: `artifacts/appendix_e_final/`; archived fresh replay JSONs:
-`results/appendix_e_replay/lp_milp/`. Replotting alone uses archived data and is
-not an independent optimizer replay.
+Data archive: [bundles/figure11.tar.gz](../../bundles/figure11.tar.gz).
+The complete per-file inventory and SHA-256 values are in
+[bundles/manifest.json](../../bundles/manifest.json). Sources, scope and commands
+are indexed in [EXPERIMENTS.json](../../EXPERIMENTS.json).
+
+See [data and training](../../docs/TRAINING_AND_DATA.md),
+[interface contract](../../docs/DATA_INTERFACE.md), and
+[acceptance policy](../../docs/ACCEPTANCE.md).

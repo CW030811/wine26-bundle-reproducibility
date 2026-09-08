@@ -1,23 +1,26 @@
-# Table 5 — additive random valuation
+# Table 5 — Additive random-valuation experiment with corrected Z lower bound
 
-Archive includes 4,000 generated instances, corrected labels and portable manifests,
-seed-1000 model/training artifacts, 120 sweep rows, and final TeX rows.
-FCP/BSP fixed-solver InS/OOS averages reproduce the paper's 24 values.
-The sweep verifier covers FCP/BSP InS/OOS. See
-[acceptance scope](../../docs/ACCEPTANCE.md).
+Corrected FCP/BSP random-valuation sweep; 24 InS/OOS statistics.
 
 ```bash
-python3 scripts/extract_bundle.py table5
-# Reaggregate the published reference CSV into TeX (no optimizer):
-uv run python src/random_valuation/make_table5_rows.py
-# New full FCP/BSP sweep, without overwriting the reference CSV:
-uv run python src/random_valuation/run_experiment_zfix.py \
-  --model-path artifacts/random_valuation/models/best_model_edge_cpbsd_mb_x_2layer_seed1000.pt \
-  --out-csv results/table5/experiment_zfix.csv
+uv run python scripts/reproduce.py prepare table5
+uv run python scripts/reproduce.py verify table5 --reference
+# Full optimizer replay; can take hours or days:
+uv run python scripts/reproduce.py replay table5
+uv run python scripts/reproduce.py plot table5
 ```
 
-`make_table5_rows.py` reads the **archived** CSV in
-`artifacts/random_valuation/results/`, not the new CSV in `results/table5/`.
-Compare a new sweep's method/variant/scale/cost/seed keys and InS/OOS averages
-against that archive; do not mistake reprinting archived TeX for a new replay.
-Generation, labeling and training are described [here](../../docs/TRAINING_AND_DATA.md).
+Use `--dry-run` to inspect the replay commands. New outputs are under
+`results/reproduced/table5/`: native result files, `verification.json`,
+`statistics.csv`, and `plots/`. Use `plot table5 --reference` to plot the
+packaged replay without solving again. Figure files are regenerated from
+data; pixel-identical PDF/PNG rendering across platforms is not required.
+
+Data archive: [bundles/table5.tar.gz](../../bundles/table5.tar.gz).
+The complete per-file inventory and SHA-256 values are in
+[bundles/manifest.json](../../bundles/manifest.json). Sources, scope and commands
+are indexed in [EXPERIMENTS.json](../../EXPERIMENTS.json).
+
+See [data and training](../../docs/TRAINING_AND_DATA.md),
+[interface contract](../../docs/DATA_INTERFACE.md), and
+[acceptance policy](../../docs/ACCEPTANCE.md).

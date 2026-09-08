@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import csv
 import json
+import math
 import statistics
 from collections import defaultdict
 from decimal import Decimal, ROUND_HALF_UP
@@ -157,18 +158,24 @@ def verify_table6(
     published_path: Path,
     training_summary_path: Path,
     seed_sample_path: Path,
+    require_complete: bool = True,
 ) -> dict:
     published = json.loads(Path(published_path).read_text(encoding="utf-8"))["table6"]
     with Path(training_summary_path).open(newline="", encoding="utf-8") as handle:
         summaries = {str(int(row["seed"])): row for row in csv.DictReader(handle)}
 
     ratios = defaultdict(list)
+    identities = defaultdict(list)
     with Path(seed_sample_path).open(newline="", encoding="utf-8") as handle:
         for row in csv.DictReader(handle):
             ratios[str(int(row["seed"]))].append(float(row["revenue_ratio"]))
+            identities[str(int(row['seed']))].append(row.get('sample_file'))
 
     details = []
     mismatches = []
+    expected_inputs = {path.name for path in (ROOT / 'data/deterministic/test_m10n10_correct_1e_3').glob('*.msgpack')}
+    if require_complete and set(ratios) != set(published):
+        mismatches.append('Unexpected or missing seed groups')
     for seed, expected in sorted(published.items(), key=lambda item: int(item[0])):
         if seed not in summaries or seed not in ratios:
             mismatches.append(f"seed {seed}: missing training summary or regenerated results")
@@ -181,7 +188,9 @@ def verify_table6(
             round(statistics.pstdev(ratios[seed]), 3),
         ]
         wanted = [float(expected[0]), float(expected[1]), float(expected[2]), float(expected[3])]
-        matched = observed == wanted
+        complete = (not require_complete or (len(identities[seed]) == 100 and len(set(identities[seed])) == 100
+                    and set(identities[seed]) == expected_inputs))
+        matched = observed == wanted and complete and all(math.isfinite(value) for value in ratios[seed])
         details.append(
             {
                 "seed": int(seed),
@@ -204,7 +213,7 @@ def verify_table6(
     }
 
 
-def verify_table7(published_path: Path, result_paths: dict[str, Path]) -> dict:
+def verify_table7(published_path: Path, result_paths: dict[str, Path], require_complete: bool = True) -> dict:
     published = json.loads(Path(published_path).read_text(encoding="utf-8"))["table7"]
     details = []
     mismatches = []
@@ -212,6 +221,22 @@ def verify_table7(published_path: Path, result_paths: dict[str, Path]) -> dict:
         path = Path(result_paths[variant])
         with path.open(newline="", encoding="utf-8") as handle:
             ratios = [float(row["revenue_ratio"]) for row in csv.DictReader(handle)]
+        complete = True
+        if require_complete:
+            long_path = path.with_name(path.stem + '_seed_sample.csv')
+            grouped = defaultdict(list)
+            with long_path.open(newline='', encoding='utf-8') as handle:
+                for row in csv.DictReader(handle):
+                    grouped[row['sample_file']].append((int(row['seed']), float(row['revenue_ratio'])))
+            dataset = path.stem.removeprefix('test_result_FCP_4layer_')
+            expected_inputs = {item.name for item in (ROOT / 'data/ood' / dataset).glob('*.msgpack')}
+            complete = (len(grouped) == 100 and set(grouped) == expected_inputs and len(ratios) == 100
+                        and all(len(values) == 10 and {seed for seed, _ in values} == set(range(1, 11))
+                                and all(math.isfinite(value) for _, value in values) for values in grouped.values()))
+            from_long = [statistics.fmean(value for _, value in values) for values in grouped.values()]
+            complete = complete and all(math.isclose(a, b, abs_tol=1e-10, rel_tol=1e-10)
+                                        for a, b in zip(sorted(ratios), sorted(from_long)))
+            ratios = from_long
         wanted = [float(expected[0]), float(expected[1])]
         mean_raw = statistics.fmean(ratios)
         population_std_raw = statistics.pstdev(ratios)
@@ -229,7 +254,7 @@ def verify_table7(published_path: Path, result_paths: dict[str, Path]) -> dict:
             accepted_std_convention = None
             accepted_std_display = population_std_display
         observed = [mean_display, accepted_std_display]
-        matched = mean_display == wanted[0] and accepted_std_convention is not None
+        matched = mean_display == wanted[0] and accepted_std_convention is not None and complete
         details.append(
             {
                 "variant": variant,

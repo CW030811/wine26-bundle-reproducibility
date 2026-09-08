@@ -1,17 +1,26 @@
-# Table 2 — main comparison
+# Table 2 — Main comparison of FCP, PCP, FCPLS and BSP
 
-Accepted: three sizes × FCP/PCP/FCPLS/BSP. Each neural method has ten seeds ×
-100 samples per size; BSP has 100 samples. Small rounding-boundary exceptions
-are recorded in [provenance](../../provenance/TABLE2_EXACT_REPRO.md).
+FCP, PCP, FCPLS and BSP on three sizes; 12 method/size cells.
 
 ```bash
-python3 scripts/extract_bundle.py table2
-uv run python scripts/verify_main_results.py --experiment table2
-# Full replay (requires full Gurobi license; can take hours):
-uv run python scripts/run_table2_exact.py
+uv run python scripts/reproduce.py prepare table2
+uv run python scripts/reproduce.py verify table2 --reference
+# Full optimizer replay; can take hours or days:
+uv run python scripts/reproduce.py replay table2
+uv run python scripts/reproduce.py plot table2
 ```
 
-Source: `scripts/run_table2_exact.py` and the FCP/PCP/FCPLS/BSP evaluators under
-`src/deterministic/`. Inputs: three `data/deterministic/test_m*n10_correct_1e_3`
-directories. Models: `models/main_base_4layer_correct_lr_3`. Reference CSVs:
-`results/main_exact_rerun/table2/`. Use the Table 6 bundle for the shared training data.
+Use `--dry-run` to inspect the replay commands. New outputs are under
+`results/reproduced/table2/`: native result files, `verification.json`,
+`statistics.csv`, and `plots/`. Use `plot table2 --reference` to plot the
+packaged replay without solving again. Figure files are regenerated from
+data; pixel-identical PDF/PNG rendering across platforms is not required.
+
+Data archive: [bundles/table2.tar.gz](../../bundles/table2.tar.gz).
+The complete per-file inventory and SHA-256 values are in
+[bundles/manifest.json](../../bundles/manifest.json). Sources, scope and commands
+are indexed in [EXPERIMENTS.json](../../EXPERIMENTS.json).
+
+See [data and training](../../docs/TRAINING_AND_DATA.md),
+[interface contract](../../docs/DATA_INTERFACE.md), and
+[acceptance policy](../../docs/ACCEPTANCE.md).

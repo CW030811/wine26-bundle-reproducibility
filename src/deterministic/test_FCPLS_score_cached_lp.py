@@ -1645,9 +1645,9 @@ def main():
     """
     parser = argparse.ArgumentParser(description="Multi-model average evaluation (FCP Local Search with cached LP skeletons)")
     parser.add_argument("--data_dir", type=str, default=os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))
-    parser.add_argument("--test_subdirs", type=str, default="data/deterministic/test_m10n10_1e_3;data/deterministic/test_m20n10_1e_3;data/deterministic/test_m30n10_1e_3", 
+    parser.add_argument("--test_subdirs", type=str, default="data/deterministic/test_m10n10_correct_1e_3;data/deterministic/test_m20n10_correct_1e_3;data/deterministic/test_m30n10_correct_1e_3",
                         help="Test data subdirectories (separated by semicolon)")
-    parser.add_argument("--model_dir", type=str, default="models/base_4layer")
+    parser.add_argument("--model_dir", type=str, default="models/main_base_4layer_correct_lr_3")
     parser.add_argument("--layers", type=str, default="4", help="Layers list, comma separated")
     parser.add_argument("--seeds", type=str, default="1,2,3,4,5,6,7,8,9,10", help="Seeds list, comma separated")
     parser.add_argument("--result_dir", type=str, default="results/fcpls", help="Results save directory")

@@ -1,8 +1,8 @@
 {
   "src/appendix/rerun_seed1.py": {
     "source_sha256": "9d5cc188d21d42cfe56cbadaa153dfb3fe3a6cfddc080773e1f9943d1ebfc7c3",
-    "published_sha256": "9d5cc188d21d42cfe56cbadaa153dfb3fe3a6cfddc080773e1f9943d1ebfc7c3",
-    "changed_in_public_export": false
+    "published_sha256": "b16b3469e726fba5b5e82a9c52ead91a87cc4148c4e9a857ca1c982dfe7a1a16",
+    "changed_in_public_export": true
   },
   "src/appendix/legacy_runtime/test_PCP.py": {
     "source_sha256": "8e0a831a8388ec20ea0d0cc16739d60d9fe7a3e7029e6cc5c499907806a1fd42",
@@ -36,8 +36,8 @@
   },
   "src/deterministic/test_BSP.py": {
     "source_sha256": "0b3fbd5fb9789b450c1142492d897380d86b8a98b48e9f8c75c8e0464e8b3b63",
-    "published_sha256": "0b3fbd5fb9789b450c1142492d897380d86b8a98b48e9f8c75c8e0464e8b3b63",
-    "changed_in_public_export": false
+    "published_sha256": "32ddfc7ccd44a3c7c694c99c89107f20f3976d3054666151b6fb1db893dedd41",
+    "changed_in_public_export": true
   },
   "src/deterministic/generate_data_bundle_log.py": {
     "source_sha256": "5db7d4d6374c1420a5a284618466df2c2ccac7ea20de0b588f716f6d6f0f88d6",
@@ -56,8 +56,8 @@
   },
   "src/deterministic/test_PCP_cp_multi_model_avg.py": {
     "source_sha256": "f83ab38be2ce6205a66f9752cd498431779b9718a3ce852fc9dba2fcada7f931",
-    "published_sha256": "f83ab38be2ce6205a66f9752cd498431779b9718a3ce852fc9dba2fcada7f931",
-    "changed_in_public_export": false
+    "published_sha256": "5938a7bfdece2f9c85e0cc55544b455970e87c2e104c06a4679359d2b92d4d66",
+    "changed_in_public_export": true
   },
   "src/deterministic/generate_data_PCP_cp.py": {
     "source_sha256": "3df9daa93509710a9814e630ce5533372935f24459956ad983bab0063f16329e",
@@ -86,13 +86,13 @@
   },
   "src/deterministic/test_FCP_multi_model_avg_log.py": {
     "source_sha256": "87e8cdab8a8332606fe444b2d5dcb0d92cb48506c15da70c82a498664893258c",
-    "published_sha256": "87e8cdab8a8332606fe444b2d5dcb0d92cb48506c15da70c82a498664893258c",
-    "changed_in_public_export": false
+    "published_sha256": "69b5aaa2c13bdb3a909a05bc0e13cc5b6e042527aca5d0214c03692a7931884c",
+    "changed_in_public_export": true
   },
   "src/deterministic/test_FCPLS_score_cached_lp.py": {
     "source_sha256": "ec19dc80010c4815d7757bffd80dc07df4ee0ddf4c27c9f01932104737e45d78",
-    "published_sha256": "ec19dc80010c4815d7757bffd80dc07df4ee0ddf4c27c9f01932104737e45d78",
-    "changed_in_public_export": false
+    "published_sha256": "ebd84ab2329c204272b2148edd154284773a713ae7a8c13a01add01793272536",
+    "changed_in_public_export": true
   },
   "src/deterministic/test_FCP.py": {
     "source_sha256": "6835d2b36da516be107bff4b920b776aca2ce17c78bc41b525f96847620ed24b",
@@ -101,8 +101,8 @@
   },
   "src/deterministic/test_FCP_multi_model_avg.py": {
     "source_sha256": "1cdd78ea5453569179300eb3f0582ebbecf84e9e05ea814e1c50a5b7e91c84e1",
-    "published_sha256": "1cdd78ea5453569179300eb3f0582ebbecf84e9e05ea814e1c50a5b7e91c84e1",
-    "changed_in_public_export": false
+    "published_sha256": "897af93d12bb2ee5c08bf8f7ba894159f0a4dae667dc6d2527c9af6ad00dd997",
+    "changed_in_public_export": true
   },
   "src/deterministic/generate_data_bundle_f0.33.py": {
     "source_sha256": "b10d71a47224cbfab68fec9d42f1f0883e68329111421112c7fc828ee0a4d835",
@@ -121,8 +121,8 @@
   },
   "src/deterministic/test_FCP_multi_model_avg_f33.py": {
     "source_sha256": "2e2165616685a27e2d7f45a1367e3d69c4b588c509d5deb6dc58e28affeed2e4",
-    "published_sha256": "2e2165616685a27e2d7f45a1367e3d69c4b588c509d5deb6dc58e28affeed2e4",
-    "changed_in_public_export": false
+    "published_sha256": "973eb8eff67c86c394dc3484fe156e91b51d7ef4678342f54f62bb2f4f75a331",
+    "changed_in_public_export": true
   },
   "src/deterministic/test_FCP_f33.py": {
     "source_sha256": "1b17ce7ce8e14f6f108a7f92765a944663eaa3c7ff1d9bbf892bf6d4518eb3f3",
@@ -131,8 +131,8 @@
   },
   "src/deterministic/Training_multi_layer.py": {
     "source_sha256": "a31e37841131e6f4eae7dc70fb3282d425f6b22ce227a12752d49fa3f0a0e162",
-    "published_sha256": "a31e37841131e6f4eae7dc70fb3282d425f6b22ce227a12752d49fa3f0a0e162",
-    "changed_in_public_export": false
+    "published_sha256": "ac3a24da46d729110c5ae1ef6103acaebdd0daa17ee595026102d60aeeba6429",
+    "changed_in_public_export": true
   },
   "src/report/replot_verification_paths.py": {
     "source_sha256": "11ed91a6e016976015ba935158b272490fc36d636bb1de0d661b2dd115a6db68",
@@ -201,18 +201,18 @@
   },
   "scripts/verify_main_results.py": {
     "source_sha256": "66527dd8e19671e4028b858f001be56462356302a28909c87b505cadc662c2d8",
-    "published_sha256": "66527dd8e19671e4028b858f001be56462356302a28909c87b505cadc662c2d8",
-    "changed_in_public_export": false
+    "published_sha256": "afb5f28d02c8fc25b5e61c10814c67fdd2fdfaf0813ec5f4b9662b8b8e0d3c7a",
+    "changed_in_public_export": true
   },
   "scripts/run_remaining_exact.py": {
     "source_sha256": "e8df93a1e8ce918086a0557da8aeca2c9cda04c1581ed5df5f56012ff867862e",
-    "published_sha256": "e8df93a1e8ce918086a0557da8aeca2c9cda04c1581ed5df5f56012ff867862e",
-    "changed_in_public_export": false
+    "published_sha256": "22edeb19d344c02ec400c1618c3ef5958dc2ee8003dbcb3dcfa75e93c0fa59d6",
+    "changed_in_public_export": true
   },
   "scripts/verify_remaining_results.py": {
     "source_sha256": "10a402913fa21ea9c08b09d4a5f7afc63f9c20a4cfbddfb17aea498d174201a4",
-    "published_sha256": "10a402913fa21ea9c08b09d4a5f7afc63f9c20a4cfbddfb17aea498d174201a4",
-    "changed_in_public_export": false
+    "published_sha256": "aab574d85d408e514242a121d3ef61f300a02fbf6795b8d85e2ecc68c49f3789",
+    "changed_in_public_export": true
   },
   "scripts/compare_appendix_cd_rerun.py": {
     "source_sha256": "806d96c9da2268d72a55700c82e7eb5a8af75a9ced3b216a58250bd5e936479e",
@@ -226,7 +226,7 @@
   },
   "provenance/PORTABILITY_PATCHES.md": {
     "source_sha256": "a9f85f74bbc5f7d070559a4cc3488fa5cb22037fb2e1325da2984ba9084b1c50",
-    "published_sha256": "7e9c561e298b3ebc8549eb1be8a54a5235a239095cf914b49b7aa8f408235a6f",
+    "published_sha256": "3ecfad4f3252e75dbad8c4c9b86fccdc634fe58f2445be674b3fe7308fb1f125",
     "changed_in_public_export": true
   },
   "provenance/codex_guard_sensitivity_latest_local_search_20260529.md": {
@@ -271,12 +271,54 @@
   },
   "tests/test_verify_main_results.py": {
     "source_sha256": "cfc25fc24658730f763d070900f9c6234c7da61a4d2e06951b1a0dc1c6614132",
-    "published_sha256": "cfc25fc24658730f763d070900f9c6234c7da61a4d2e06951b1a0dc1c6614132",
-    "changed_in_public_export": false
+    "published_sha256": "e99cce1165de01c6ac804a215ff55b3593ac30e014875f8c8c8266067190b33b",
+    "changed_in_public_export": true
   },
   "tests/test_table2_long_outputs.py": {
     "source_sha256": "2463f35ee680d884e4f2a00344ea0dbb566ff9f150534878a92cda724c6bd0c1",
     "published_sha256": "2463f35ee680d884e4f2a00344ea0dbb566ff9f150534878a92cda724c6bd0c1",
     "changed_in_public_export": false
+  },
+  "scripts/audit_release.py": {
+    "source_sha256": null,
+    "published_sha256": "2de9b57db90291de67500986536ef029b9e353ce52abfebb80e2456daaec9ab3",
+    "origin": "Public release orchestration and verification",
+    "changed_in_public_export": true
+  },
+  "scripts/data_pipeline.py": {
+    "source_sha256": null,
+    "published_sha256": "0d3ce3e2338f9af31172442e2c0c0bcb62adf955869baa3da514eb58a6c74436",
+    "origin": "Public release orchestration and verification",
+    "changed_in_public_export": true
+  },
+  "scripts/extract_bundle.py": {
+    "source_sha256": null,
+    "published_sha256": "1a67883545619c978309f5daee435d9801a08e551712510540dcb370cc0cc516",
+    "origin": "Public release orchestration and verification",
+    "changed_in_public_export": true
+  },
+  "scripts/plot_results.py": {
+    "source_sha256": null,
+    "published_sha256": "be80b928dc2cf2db45a84db950f8c93d48c3917860491cd31474beed9a43a15f",
+    "origin": "Public release orchestration and verification",
+    "changed_in_public_export": true
+  },
+  "scripts/reproduce.py": {
+    "source_sha256": null,
+    "published_sha256": "55076ad86ddce8b06e32bdf6ff747d82e23fb1fbfa8e9db91940848a79f9275f",
+    "origin": "Public release orchestration and verification",
+    "changed_in_public_export": true
+  },
+  "scripts/verify_generation.py": {
+    "source_sha256": null,
+    "published_sha256": "a3be48fa05b3517c9132379d6262d393ec5a80c723d629bf97e8826ddf9764fe",
+    "origin": "Public release orchestration and verification",
+    "changed_in_public_export": true
+  },
+  "scripts/verify_reference_results.py": {
+    "source_sha256": null,
+    "published_sha256": "718fadc4372d4787f8c6c973dced4840f94d55dc5ada2e3f4fa734b88ce370b8",
+    "origin": "Public release orchestration and verification",
+    "changed_in_public_export": true
   }
 }

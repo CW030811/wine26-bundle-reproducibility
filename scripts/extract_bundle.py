@@ -54,7 +54,7 @@ def extract_bundle(root, entry, check_only=False):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('experiment', help='table2, table5, table6, table7, figure9, figure10, figure11, or all')
+    parser.add_argument('experiment', help='An experiment/training shard key from bundles/manifest.json, or all')
     parser.add_argument('--check-only', action='store_true', help='Validate archives without extracting')
     args = parser.parse_args()
     manifest = json.loads((ROOT / 'bundles/manifest.json').read_text())

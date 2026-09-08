@@ -592,6 +592,7 @@ def plot_cutoff(df: pd.DataFrame, outdir: Path):
 
 
 def main():
+    global OUT_ROOT
     parser = argparse.ArgumentParser()
     parser.add_argument("--mode", choices=["cutoff", "k"], default="cutoff")
     parser.add_argument("--fcp-sample-count", type=int, default=30)
@@ -601,7 +602,9 @@ def main():
     # This matters for PCP rows that return ObjBound when Gurobi reaches TIME_LIMIT.
     parser.add_argument("--time-limit", type=int, default=60)
     parser.add_argument("--resume", action="store_true")
+    parser.add_argument("--output-root", type=Path, default=OUT_ROOT)
     args = parser.parse_args()
+    OUT_ROOT = args.output_root.resolve()
     OUT_ROOT.mkdir(parents=True, exist_ok=True)
     manifest = {
         "created_at": time.strftime("%Y-%m-%d %H:%M:%S"),

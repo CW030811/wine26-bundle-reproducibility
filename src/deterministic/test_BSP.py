@@ -239,7 +239,7 @@ def main():
     parser.add_argument(
         "--test_subdirs",
         type=str,
-        default="data/deterministic/test_BSP_m10n100_1e_3",
+        default="data/deterministic/test_BSP_m10n100_correct_1e_3",
         help="Test data subdirectories separated by semicolons.",
     )
     parser.add_argument("--result_dir", type=str, default="results/bsp")

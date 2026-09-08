@@ -200,9 +200,9 @@ def run_one_model(mdl, data, n, m_segments):
 def main():
     parser = argparse.ArgumentParser(description="多模型平均评估（基于 test_FCP）")
     parser.add_argument("--data_dir", type=str, default=os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))
-    parser.add_argument("--test_subdirs", type=str, default="data/deterministic/test_m10n10_1e_3;data/deterministic/test_m20n10_1e_3;data/deterministic/test_m30n10_1e_3", 
+    parser.add_argument("--test_subdirs", type=str, default="data/deterministic/test_m10n10_correct_1e_3;data/deterministic/test_m20n10_correct_1e_3;data/deterministic/test_m30n10_correct_1e_3",
                         help="测试数据子目录（多个用分号分隔）")
-    parser.add_argument     ("--model_dir", type=str, default="models/base_4layer", help="模型目录")
+    parser.add_argument     ("--model_dir", type=str, default="models/main_base_4layer_correct_lr_3", help="模型目录")
     parser.add_argument("--layers", type=str, default="4", help="要使用的层数列表, 逗号分隔")
     parser.add_argument("--seeds", type=str, default="1,2,3,4,5,6,7,8,9,10", help="要使用的seed列表, 逗号分隔")
     parser.add_argument("--result_dir", type=str, default="results/fcp", help="结果保存目录")

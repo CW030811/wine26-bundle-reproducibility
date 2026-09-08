@@ -1,0 +1,32 @@
+{
+  "passed": true,
+  "scope": "Public entry-point integration checks; small training runs are not full paper retraining",
+  "reference_experiments_passed": 12,
+  "plot_png_files_generated": 13,
+  "plot_pdf_files_generated": 13,
+  "random_pipeline": {
+    "generated_instances": 20,
+    "products": 2,
+    "split_counts": [15, 3, 2],
+    "labels_with_solution": 20,
+    "training_epochs": 1,
+    "checkpoint_written": true,
+    "training_metrics_written": true
+  },
+  "deterministic_pipeline": {
+    "generated_and_labeled_instances": 10,
+    "products": 2,
+    "segments": 10,
+    "training_seeds": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+    "epochs_per_seed": 1,
+    "best_checkpoints_written": 10
+  },
+  "self_improvement_labeling": {
+    "generated_and_labeled_instances": 1,
+    "products": 2,
+    "segments": 2,
+    "model": "base seed 9",
+    "completed": true
+  },
+  "headless_plotting": "Agg backend; validated generation, training charts and paper-result plots"
+}

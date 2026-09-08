@@ -7,6 +7,8 @@
 3. Table 5 脚本只修改了包内路径默认值；核心 Z-fix、实例生成、模型、种子和求解逻辑不变。
 4. Appendix C/D 的原临时 driver 未归档。`src/appendix/rerun_seed1.py` 从 seed10 通用 runner 重建，并按最终 provenance 改为 seed1、FCP 30 样本、PCP 独立 10 样本、K 30 样本、每次求解 60 秒上限。抽样集合已经与最终 1080/630 行 CSV 逐项核对。
 5. Appendix E 的原 runner、cached-LP 源码和结果从历史版本恢复。公开版另将数据目录默认值改为当前目录、绘图库缓存改为包内路径；不改变求解逻辑。原源码哈希和公开版哈希记录在 `SOURCE_EXPORT.json`。guard 同步采用公开版哈希。重画脚本只把 JSON/输出目录改为包内相对路径。
+6. 公开统一入口提供实验选择、独立输出目录、固定样本清单核对、完整 seed/sample 检查与数据驱动绘图。旧评估器的默认路径已改为最终公开数据和模型；训练 summary 的模型地址同步归一化。
+7. `data_pipeline.py` 统一生成、标签和训练路径，连接随机数据的 train/eval/test manifest，并设置无界面绘图后端，支持 tmux 和 CI 环境。
 
 关键原始 `Bundle_code` SHA-256 前缀：
 

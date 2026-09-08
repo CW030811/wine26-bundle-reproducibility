@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Audit published reference/replay evidence. Does not run optimizers or training."""
 import csv
+import argparse
 import hashlib
 import json
 import math
@@ -33,14 +34,14 @@ def rows(path):
         return list(csv.DictReader(handle))
 
 
-def verify_sensitivity(name):
+def verify_sensitivity(name, result_root=None):
     cutoff = name == 'figure9'
     filename = 'cutoff_sensitivity_FCP_PCP_combined.csv' if cutoff else 'justify_K_all_results_long.csv'
     mode = 'cutoff' if cutoff else 'k_justify'
     keys = ['dataset', 'sample_id', 'cutoff', 'strategy'] if cutoff else ['dataset', 'sample_id', 'strategy']
     ignored = ['time_ratio'] if cutoff else ['runtime_ratio', 'total_time', 'base_running_time']
     reference = rows(ROOT / 'artifacts/appendix_cd' / filename)
-    replay = rows(ROOT / 'results/appendix_cd_seed1' / mode / filename)
+    replay = rows((Path(result_root) if result_root else ROOT / 'results/appendix_cd_seed1') / mode / filename)
     left = {tuple(row[k] for k in keys): row for row in reference}
     right = {tuple(row[k] for k in keys): row for row in replay}
     expected = 1080 if cutoff else 630
@@ -63,9 +64,9 @@ def verify_sensitivity(name):
             'accepted_exceptions': exceptions, 'mismatches': differences}
 
 
-def verify_table5():
+def verify_table5(result_csv=None):
     published = json.loads((ROOT / 'provenance/PUBLISHED_VALUES.json').read_text())['table5_rows']
-    data = rows(ROOT / 'artifacts/random_valuation/results/experiment_zfix.csv')
+    data = rows(Path(result_csv) if result_csv else ROOT / 'artifacts/random_valuation/results/experiment_zfix.csv')
     checks = []
     for target in published:
         for method, offset in [('FCP', 2), ('BSP', 5)]:
@@ -80,15 +81,15 @@ def verify_table5():
                                'matched': round(value, 3) == target[index]})
     generated = subprocess.check_output([sys.executable, str(ROOT / 'src/random_valuation/make_table5_rows.py')], cwd=ROOT)
     archived = (ROOT / 'artifacts/random_valuation/results/table5_corrected_rows.tex').read_bytes()
-    return {'passed': len(data) == 120 and all(x['matched'] for x in checks) and generated == archived,
+    return {'passed': len(data) == 120 and all(x['matched'] for x in checks) and (result_csv is not None or generated == archived),
             'checked_fcp_bsp_statistics': len(checks), 'cpbsd_a_independently_replayed': False,
             'scope': 'FCP/BSP statistics from archived sweep; CPBSD-A and runtime cells reused from paper', 'details': checks}
 
 
-def verify_figure11():
+def verify_figure11(result_root=None):
     base = ROOT / 'artifacts/appendix_e_final'
     original = json.loads((base / 'LP_MILP_verification_results.json').read_text())
-    fresh_dir = ROOT / 'results/appendix_e_replay/lp_milp'
+    fresh_dir = (Path(result_root) if result_root else ROOT / 'results/appendix_e_replay') / 'lp_milp'
     fresh = json.loads((fresh_dir / 'LP_MILP_verification_results.json').read_text())
     key = lambda r: (r['dataset_name'], r['file_name'])
     reference = {key(r): r for r in original}
@@ -99,7 +100,7 @@ def verify_figure11():
     fields = ['lp_to_milp_translation'] + paths
     exact = (len(original) == len(fresh) == len(reference) == len(replay) == 60 and reference.keys() == replay.keys()
              and all(reference[k][f] == replay[k][f] for k in reference for f in fields))
-    flags = [v for r in original for v in r['lp_to_milp_translation']]
+    flags = [v for r in fresh for v in r['lp_to_milp_translation']]
     counts = (sum(flags), len(flags))
     expected = json.loads((ROOT / 'provenance/PUBLISHED_VALUES.json').read_text())['appendix_e_final_provenance']
     guard_ok = all(hashlib.sha256((ROOT / f'src/test/{name}').read_bytes()).hexdigest() == expected['cached_lp_source_sha256']
@@ -112,18 +113,18 @@ def verify_figure11():
 
 
 def main():
+    # All public experiments share the same verifier as the replay entry point.
+    from reproduce import NAMES, reference_results, verify
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--report', type=Path)
+    args = parser.parse_args()
     report = {'scope': 'Archived evidence audit, not a new optimizer/training replay', 'experiments': {}}
-    for name in ['table2', 'table6', 'table7']:
-        result = subprocess.run([sys.executable, str(ROOT / 'scripts/verify_main_results.py'), '--experiment', name],
-                                cwd=ROOT, capture_output=True, text=True)
-        if result.returncode:
-            print(result.stderr, file=sys.stderr)
-        report['experiments'][name] = json.loads(result.stdout)
-    report['experiments']['table5'] = verify_table5()
-    for name in ['figure9', 'figure10']:
-        report['experiments'][name] = verify_sensitivity(name)
-    report['experiments']['figure11'] = verify_figure11()
+    for name in NAMES:
+        report['experiments'][name] = verify(name, reference_results(name))
     report['passed'] = all(result['passed'] for result in report['experiments'].values())
+    if args.report:
+        args.report.parent.mkdir(parents=True, exist_ok=True)
+        args.report.write_text(json.dumps(report, indent=2) + '\n')
     print(json.dumps(report, indent=2))
     return 0 if report['passed'] else 1
 

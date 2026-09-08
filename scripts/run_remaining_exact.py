@@ -10,6 +10,7 @@ from __future__ import annotations
 import argparse
 import csv
 import json
+import math
 import os
 import shutil
 import subprocess
@@ -148,6 +149,23 @@ def build_tasks(batch: str) -> list[RunTask]:
     return list(deduplicated.values())
 
 
+def build_experiment_tasks(experiment: str) -> list[RunTask]:
+    """Select exactly the methods and inputs used by one paper artifact."""
+    if experiment == "figure6":
+        return _learned_tasks("FCP", "base", BASE_MODEL_DIR, FIGURE6_DATASETS) + _bsp_tasks(FIGURE6_DATASETS)
+    if experiment == "figure7":
+        return [task for task in _figure_tasks() if task.dataset in dict(FIGURE7_DATASETS)
+                and task.model_tag in {"base", "baseline"}]
+    if experiment == "figure8":
+        # Figure 8 compares both the base and self-improved curves.
+        return [task for task in _figure_tasks() if task.dataset in dict(FIGURE7_DATASETS)
+                and task.model_tag in {"base", "self_improved", "baseline"}]
+    if experiment in {"table3", "table4"}:
+        tag = "base" if experiment == "table3" else "self_improved"
+        return [task for task in _table_tasks() if task.model_tag == tag]
+    raise ValueError(f"unknown experiment: {experiment}")
+
+
 def task_output_dir(output_root: Path, task: RunTask) -> Path:
     leaf = f"seed_{task.seed}" if task.seed is not None else "bsp"
     return output_root / "raw" / task.model_tag / task.method.lower() / task.dataset / leaf
@@ -222,6 +240,13 @@ def validate_task_result(output_root: Path, task: RunTask) -> tuple[bool, int, s
         seeds = {int(row["seed"]) for row in rows}
         if seeds != {task.seed}:
             return False, count, f"unexpected seed values: {sorted(seeds)}"
+    sample_key = "filename" if task.method == "BSP" else "sample_file"
+    names = [row.get(sample_key) for row in rows]
+    if None in names or len(set(names)) != count:
+        return False, count, "missing or duplicate sample identity"
+    field = "competitive_ratio" if task.method == "FCPLS" else "revenue_ratio"
+    if any(not math.isfinite(float(row[field])) for row in rows):
+        return False, count, "non-finite result"
     return True, count, "complete"
 
 
@@ -291,6 +316,7 @@ def combine_completed_outputs(tasks: list[RunTask], output_root: Path) -> list[d
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--batch", choices=["figures", "tables", "all"], default="all")
+    parser.add_argument("--experiment", choices=["table3", "table4", "figure6", "figure7", "figure8"])
     parser.add_argument("--root", type=Path, default=ROOT)
     parser.add_argument("--python", type=Path, default=Path(sys.executable))
     parser.add_argument("--output-root", type=Path)
@@ -305,7 +331,7 @@ def main() -> int:
         if args.output_root
         else root / "results" / "remaining_exact_rerun"
     )
-    tasks = build_tasks(args.batch)
+    tasks = build_experiment_tasks(args.experiment) if args.experiment else build_tasks(args.batch)
     if args.dry_run:
         for task in tasks:
             print(task.task_id)
@@ -326,7 +352,8 @@ def main() -> int:
     if not args.skip_license_probe:
         verify_full_gurobi_license()
 
-    manifest_path = output_root / f"{args.batch}_run_manifest.json"
+    selection = args.experiment or args.batch
+    manifest_path = output_root / f"{selection}_run_manifest.json"
     manifest = {
         "batch": args.batch,
         "runtime_comparison_required": False,
