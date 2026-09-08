@@ -11,6 +11,8 @@ import msgpack_numpy as mnp
 import numpy as np
 
 ROOT = Path(__file__).resolve().parents[1]
+FLOAT_ATOL = 1e-10  # CDF/inverse-CDF tail round trips amplify libm rounding.
+FLOAT_RTOL = 1e-12
 
 
 def load(path):
@@ -40,7 +42,7 @@ class NumericComparison:
             difference = float(np.max(np.abs(left - other))) if left.size else 0.0
             self.max_absolute_difference = max(self.max_absolute_difference, difference)
             self.numeric_leaves_different += int(not np.array_equal(left, other))
-            return bool(np.allclose(left, other, atol=1e-12, rtol=1e-12))
+            return bool(np.allclose(left, other, atol=FLOAT_ATOL, rtol=FLOAT_RTOL))
         if isinstance(left, (list, tuple)):
             if not isinstance(right, (list, tuple)) or len(left) != len(right):
                 return False
@@ -51,7 +53,7 @@ class NumericComparison:
             difference = abs(float(left) - float(right))
             self.max_absolute_difference = max(self.max_absolute_difference, difference)
             self.numeric_leaves_different += int(difference != 0)
-            return math.isclose(left, right, abs_tol=1e-12, rel_tol=1e-12)
+            return math.isclose(left, right, abs_tol=FLOAT_ATOL, rel_tol=FLOAT_RTOL)
         return left == right
 
 
@@ -71,7 +73,7 @@ def audit_random(root):
         if not comparison.equal(archived, fresh):
             mismatches.append(path.name)
     return {'instances': len(files), 'unique_seeds': len(set(seeds)), 'mismatches': mismatches,
-            'numeric_tolerance': {'atol': 1e-12, 'rtol': 1e-12},
+            'numeric_tolerance': {'atol': FLOAT_ATOL, 'rtol': FLOAT_RTOL},
             'max_absolute_difference': comparison.max_absolute_difference,
             'numeric_leaves_different': comparison.numeric_leaves_different,
             'passed': len(files) == 4000 and set(seeds) == set(range(1000, 5000)) and not mismatches}

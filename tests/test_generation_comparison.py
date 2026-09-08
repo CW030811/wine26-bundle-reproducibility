@@ -14,6 +14,8 @@ class GenerationComparisonTests(unittest.TestCase):
         self.assertGreater(comparison.max_absolute_difference, 0)
         self.assertEqual(comparison.numeric_leaves_different, 1)
         self.assertFalse(comparison.equal(np.array([1.0]), np.array([1.0 + 1e-6])))
+        # Observed x86 Linux versus macOS CDF/erfinv tail round-trip difference.
+        self.assertTrue(comparison.equal(np.array([0.0]), np.array([7.962519532611623e-12])))
 
     def test_structure_integer_identities_and_nonfinite_values_remain_strict(self):
         comparison = NumericComparison()

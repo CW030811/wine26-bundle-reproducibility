@@ -311,7 +311,7 @@
   },
   "scripts/verify_generation.py": {
     "source_sha256": null,
-    "published_sha256": "3f78774633c6a2928613b2ddfc77e4a8ad37b2c9b6311984981354d449786839",
+    "published_sha256": "4d6cf80617df7c7aff457024d1cdad1e35e7418a6b85fed7a938b2e1af1b8386",
     "origin": "Public release orchestration and verification",
     "changed_in_public_export": true
   },

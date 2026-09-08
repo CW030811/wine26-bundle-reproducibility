@@ -96,5 +96,5 @@ three shared self-improvement training shards automatically.
 
 Random-valuation generation uses normal CDF/inverse-CDF routines whose final
 float64 bits can vary between platform math libraries. The audit records the
-maximum absolute difference and permits only `atol=rtol=1e-12`; array shapes,
+maximum absolute difference and permits only `atol=1e-10, rtol=1e-12`; array shapes,
 integer identities and metadata remain strict. Archive byte hashes are unchanged.
