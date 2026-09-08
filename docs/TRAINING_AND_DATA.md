@@ -93,3 +93,8 @@ four random input arrays of all 3,000 PCP training instances. It does not rerun
 optimization labels or retrain models. Results are recorded in
 `provenance/GENERATION_AUDIT.json`. Preparing Table 4 or Figure 8 restores all
 three shared self-improvement training shards automatically.
+
+Random-valuation generation uses normal CDF/inverse-CDF routines whose final
+float64 bits can vary between platform math libraries. The audit records the
+maximum absolute difference and permits only `atol=rtol=1e-12`; array shapes,
+integer identities and metadata remain strict. Archive byte hashes are unchanged.

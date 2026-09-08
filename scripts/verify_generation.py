@@ -5,6 +5,7 @@ import importlib.util
 import json
 from pathlib import Path
 import sys
+import math
 import msgpack
 import msgpack_numpy as mnp
 import numpy as np
@@ -16,14 +17,42 @@ def load(path):
     return msgpack.unpackb(path.read_bytes(), object_hook=mnp.decode, strict_map_key=False)
 
 
-def equal(left, right):
-    if isinstance(left, dict):
-        return isinstance(right, dict) and left.keys() == right.keys() and all(equal(left[k], right[k]) for k in left)
-    if isinstance(left, np.ndarray):
-        return np.array_equal(left, np.asarray(right))
-    if isinstance(left, (list, tuple)):
-        return isinstance(right, (list, tuple)) and len(left) == len(right) and all(equal(a, b) for a, b in zip(left, right))
-    return left == right
+class NumericComparison:
+    """Preserve structure and integer identities; allow only float64 roundoff."""
+    def __init__(self):
+        self.max_absolute_difference = 0.0
+        self.numeric_leaves_different = 0
+
+    def equal(self, left, right):
+        if isinstance(left, dict):
+            if not isinstance(right, dict) or left.keys() != right.keys():
+                return False
+            results = [self.equal(left[key], right[key]) for key in left]
+            return all(results)
+        if isinstance(left, np.ndarray):
+            other = np.asarray(right)
+            if left.shape != other.shape:
+                return False
+            if left.dtype.kind not in 'fc':
+                return np.array_equal(left, other)
+            if not (np.isfinite(left).all() and np.isfinite(other).all()):
+                return False
+            difference = float(np.max(np.abs(left - other))) if left.size else 0.0
+            self.max_absolute_difference = max(self.max_absolute_difference, difference)
+            self.numeric_leaves_different += int(not np.array_equal(left, other))
+            return bool(np.allclose(left, other, atol=1e-12, rtol=1e-12))
+        if isinstance(left, (list, tuple)):
+            if not isinstance(right, (list, tuple)) or len(left) != len(right):
+                return False
+            return all([self.equal(a, b) for a, b in zip(left, right)])
+        if isinstance(left, (float, np.floating)):
+            if not isinstance(right, (float, int, np.number)) or not (math.isfinite(left) and math.isfinite(right)):
+                return False
+            difference = abs(float(left) - float(right))
+            self.max_absolute_difference = max(self.max_absolute_difference, difference)
+            self.numeric_leaves_different += int(difference != 0)
+            return math.isclose(left, right, abs_tol=1e-12, rel_tol=1e-12)
+        return left == right
 
 
 def audit_random(root):
@@ -33,14 +62,18 @@ def audit_random(root):
     spec.loader.exec_module(module)
     files = sorted((root / 'data/random_valuation_n5').glob('*.msgpack'))
     mismatches, seeds = [], []
+    comparison = NumericComparison()
     for path in files:
         archived = load(path)
         setup = module.CPBSDSetup(**archived['setup'])
         fresh = module.generate_cpbsd_instance(setup)
         seeds.append(setup.seed)
-        if not equal(archived, fresh):
+        if not comparison.equal(archived, fresh):
             mismatches.append(path.name)
     return {'instances': len(files), 'unique_seeds': len(set(seeds)), 'mismatches': mismatches,
+            'numeric_tolerance': {'atol': 1e-12, 'rtol': 1e-12},
+            'max_absolute_difference': comparison.max_absolute_difference,
+            'numeric_leaves_different': comparison.numeric_leaves_different,
             'passed': len(files) == 4000 and set(seeds) == set(range(1000, 5000)) and not mismatches}
 
 
